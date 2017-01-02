@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  timestart: 2017-01-02
+  timefinish: 2017-01-02
+  level: 
+  user: MyString
+
+two:
+  timestart: 2017-01-02
+  timefinish: 2017-01-02
+  level: 
+  user: MyString
