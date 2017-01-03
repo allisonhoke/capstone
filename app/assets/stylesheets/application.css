@@ -23,5 +23,10 @@ li {
 }
 
 .number-card {
-  background-color: red;
+  background-color: tomato;
+}
+
+.hand {
+  background-color: salmon;
+  border: solid black 2px;
 }
