@@ -13,8 +13,8 @@
  *= require_tree .
  *= require_self
  */
-/*.number-card {
+div {
   border: solid black 2px;
   height: 4em;
   width: 4em;
-}*/
+}
