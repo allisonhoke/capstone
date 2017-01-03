@@ -1,32 +1,19 @@
+/*jshint esversion: 6 */
+
 var Hand = React.createClass({
   getInitialState: function() {
     return this.props.data;
   },
   render: function() {
-    // the hand creates 5 cards, each with an individual state and renders those
-    var createItem = function(card) {
-      return React.DOM.li(
-        className="number-card",
-        // card
+    // render a ul that iterates through the props number set array and creates a card for each number
+    return React.DOM.ul(
+      null,
+      this.props.data.cardSet.map((cardNumber) =>
         React.createElement(
           Card,
-          {value: card}
+          {key: cardNumber.toString(), value: cardNumber}
         )
-      );
-
-      // <li>{card.value}</li>;
-      // for card in this.state.value
-      //     React.createElement Card, key: card.id, card: card
-    };
-
-    return React.DOM.ul(
-      className="hand",
-      this.props.data.value.map(createItem)
-      // this.state.value
-      // "THIS IS A HAND" + {this.props.value.map(createItem)}
+      )
     );
-    // <ul>"THIS IS A HAND" + {this.props.value.map(createItem)}</ul>;
   }
 });
-
-React.renderComponent(Hand(), mountNode);

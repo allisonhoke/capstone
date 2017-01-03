@@ -13,8 +13,15 @@
  *= require_tree .
  *= require_self
  */
-div {
+li {
   border: solid black 2px;
   height: 4em;
   width: 4em;
+  list-style: none;
+  margin: 1em;
+  text-align: center;
+}
+
+.number-card {
+  background-color: red;
 }

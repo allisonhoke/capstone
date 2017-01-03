@@ -5,7 +5,7 @@ class GamesController < ApplicationController
     # the object will have properties that you reference by
     # var = db.collectionname.find()
     # var["attribute(key in the DB)"]
-    @card_values = {value: [0,1,2,3,4]}
+    @card_values = {cardSet: [0,1,2,3,4]}
   end
 
   def create

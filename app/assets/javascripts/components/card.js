@@ -1,37 +1,22 @@
-// import React from 'react';
-//
-// class Card extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       value: null
-//     };
-//   }
-//   render() {
-//     return (
-//       <button>
-//         {1234}
-//       </button>
-//     );
-//   }
-// }
-
-// TODO: adjust the card so that it only displays its value - there is no need for anything to happen when it is clicked
+/*jshint esversion: 6 */
 
 var Card = React.createClass({
   getInitialState: function() {
     return this.props;
   },
-  // handleClick: function() {
-  //   this.setState({value: this.state.value + 1});
-  // },
+
   render: function() {
-    return React.DOM.div(
+    return React.createElement(
+      'li',
       null,
-      // {onClick: this.handleClick},
-      this.state.value
+      this.state.value,
+      console.log("the value is: " + this.state.value)
+
     );
+    // return React.DOM.li(
+    //   null,
+    //   this.state.value,
+    //   console.log("the value of this card is: " + this.state.value)
+    // );
   }
 });
-
-// React.renderComponent(Card(), mountNode);
