@@ -20,7 +20,7 @@
 
 var Card = React.createClass({
   getInitialState: function() {
-    return {value: 0};
+    return this.props;
   },
   // handleClick: function() {
   //   this.setState({value: this.state.value + 1});
