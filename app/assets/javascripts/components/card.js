@@ -8,15 +8,9 @@ var Card = React.createClass({
   render: function() {
     return React.createElement(
       'li',
-      null,
-      this.state.value,
-      console.log("the value is: " + this.state.value)
-
+      {className: "number-card"},
+      this.state.value
     );
-    // return React.DOM.li(
-    //   null,
-    //   this.state.value,
-    //   console.log("the value of this card is: " + this.state.value)
-    // );
+
   }
 });
