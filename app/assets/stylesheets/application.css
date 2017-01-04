@@ -30,3 +30,11 @@ li {
   background-color: salmon;
   border: solid black 2px;
 }
+
+.playing-board {
+  background-color: #59a693;
+  border: solid black 2px;
+  height: 20em;
+  width: 80%;
+  margin: auto;
+}
