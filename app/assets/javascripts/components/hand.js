@@ -4,6 +4,15 @@ var Hand = React.createClass({
   getInitialState: function() {
     return this.props.data;
   },
+  // propTypes: {
+  //   name: React.PropTypes.string
+  // },
+  //
+  // getDefaultProps: function() {
+  //   return {
+  //     name: 'Mary'
+  //   };
+  // },
   render: function() {
     // render a ul that iterates through the props number set array and creates a card for each number
     return React.createElement(
