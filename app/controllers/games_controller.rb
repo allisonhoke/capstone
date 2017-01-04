@@ -9,6 +9,8 @@ class GamesController < ApplicationController
     # TODO: how do you call the database???
     @dbset = Game.get_random_card_set
     @card_values = {cardSet: @dbset}
+
+    @playing_board = {toDisplay: "THIS IS THE BOARD"}
   end
 
   def create
