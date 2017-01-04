@@ -1,4 +1,4 @@
-/*jshint esversion: 6 */
+
 
 var Hand = React.createClass({
   getInitialState: function() {
@@ -18,12 +18,12 @@ var Hand = React.createClass({
     return React.createElement(
       'ul',
       {className: "hand row small-up-6"},
-      this.props.data.cardSet.map((cardNumber) =>
-        React.createElement(
+      this.props.data.cardSet.map(function(cardNumber) {
+        return React.createElement(
           Card,
           {key: cardNumber.toString(), value: cardNumber}
-        )
-      )
+        );
+      })
     );
   }
 });

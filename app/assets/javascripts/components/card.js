@@ -1,5 +1,3 @@
-/*jshint esversion: 6 */
-
 var Card = React.createClass({
   getInitialState: function() {
     return this.props;
