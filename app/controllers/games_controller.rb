@@ -5,11 +5,14 @@ class GamesController < ApplicationController
     # the object will have properties that you reference by
     # var = db.collectionname.find()
     # var["attribute(key in the DB)"]
-    @card_values = {cardSet: [0,1,2,3,4]}
+    # @card_values = {cardSet: [0,1,2,3,4]}
+    # TODO: how do you call the database???
+    @dbset = Game.get_random_card_set
+    @card_values = {cardSet: @dbset}
   end
 
   def create
-    # @game = ModelObject.new(game_params)
+    # @game = Game.new(game_params)
     # if @game.insert_document
     # => render json: @game
     # else
