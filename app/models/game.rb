@@ -6,6 +6,7 @@ class Game
   field :user, type: String
 
   def self.get_random_card_set
+    # TODO: actually get a random set rather than the only one that is in the DB
     client = Mongoid::Clients.default
     collection = client[:games]
 
