@@ -16,7 +16,7 @@ var Hand = React.createClass({
   //   };
   // },
   render: function() {
-    console.log("THE HAND HAS: " + JSON.stringify(this.state));
+    // console.log("THE HAND HAS: " + JSON.stringify(this.state));
     // render a ul that iterates through the props number set array and creates a card for each number
     return React.createElement(
       'ul',
@@ -35,7 +35,10 @@ var Hand = React.createClass({
   drop: function(e) {
     e.preventDefault();
     var data = JSON.parse(e.dataTransfer.getData('text'));
-    console.log(data);
+    console.log("Data is: " + JSON.stringify(data));
+    this.state.card_array.push(data);
+    this.setState(this.state);
+    // TODO: figure out how to put things back into the hand
     // var datatwo = e.nativeEvent;
     // console.log(datatwo);
     // console.log("before state: " + JSON.stringify(this.state));
@@ -46,8 +49,14 @@ var Hand = React.createClass({
     // e.target.append(data);
   },
   onDragLeave: function(e) {
-    var data = e.dataTransfer.getData('text');
-    console.log("LEAVE DATA IS: " + data);
-    // console.log("The event is: " + e.dataTransfer.getData('text'));
+    console.log("INITIAL HAND: " + JSON.stringify(this.state.card_array));
+    for (var i = 0; i < this.state.card_array.length; i++) {
+      if (this.state.card_array[i].value == e.target.innerHTML) {
+        this.state.card_array.splice(i, 1);
+      }
+    }
+    this.setState(this.state);
+    console.log("INITIAL HAND: " + JSON.stringify(this.state.card_array));
   }
 });
+// JSON.stringify(this.state.card_array)

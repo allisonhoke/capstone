@@ -1,6 +1,6 @@
 var Card = React.createClass({
   getInitialState: function() {
-    return this.props;
+    return {value: this.props.value};
   }, //{key: cardNumber.toString(), value: cardNumber}
   propTypes: {
     value: React.PropTypes.number
