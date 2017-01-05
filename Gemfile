@@ -28,6 +28,9 @@ gem 'bson_ext'
 #react
 gem 'react-rails', '~> 1.0'
 
+#browserify
+gem "browserify-rails"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

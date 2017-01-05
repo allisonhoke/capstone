@@ -10,7 +10,7 @@ class GamesController < ApplicationController
     @dbset = Game.get_random_card_set
     @card_values = {cardSet: @dbset}
 
-    @playing_board = {toDisplay: "THIS IS THE BOARD"}
+    @playing_board = {toDisplay: "THIS IS THE BOARD", items: []}
   end
 
   def create
