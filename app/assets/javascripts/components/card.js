@@ -1,3 +1,5 @@
+// require('pubsub-js');
+
 var Card = React.createClass({
   getInitialState: function() {
     return {value: this.props.value, clickable: this.props.can_click};
@@ -8,9 +10,7 @@ var Card = React.createClass({
     // callbackParent: React.PropTypes.func
   },
   // componentWillMount: function() {
-  //   globalBroadcaster.subscribe('dragging', function() {
-  //     console.log("heard the pubsub event" + this.state.value);
-  //   });
+  //   var token = PubSub.subscribe('start-dragging', function() {console.log("pubsub started dragging");});
   // },
   // getDefaultProps: function() {
   //   return {
@@ -28,7 +28,7 @@ var Card = React.createClass({
     console.log(this.props);
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData('text', JSON.stringify(this.state));
-    // globalBroadcaster.publish('dragging');
+    // PubSub.publish('start-dragging');
     // this.props.callbackParent(this.state.value);
   },
   onDragEnd: function(e) {

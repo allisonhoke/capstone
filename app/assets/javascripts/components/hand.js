@@ -55,6 +55,7 @@ var Hand = React.createClass({
   },
   onDragLeave: function(e) {
     //remove the card from the hand when it is dragged out of the hand component
+    console.log("DISAPPEARING " + JSON.stringify(this.state));
     console.log("INITIAL HAND: " + JSON.stringify(this.state.card_array));
     for (var i = 0; i < this.state.card_array.length; i++) {
       if (this.state.card_array[i].value == e.target.innerHTML) {
