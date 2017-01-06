@@ -9,9 +9,17 @@ var Hand = React.createClass({
   propTypes: {
     cardSet: React.PropTypes.array
   },
-  // toggleOnePointer: function(value) {
-  //   console.log("GOT IN HERE TOO!!" + value);
-  // },
+  removeChild: function(value) {
+    console.log("GOT IN HERE TOO!!" + value);
+    for (var i = 0; i < this.state.card_array.length; i++) {
+        if (this.state.card_array[i].value == value) {
+          this.state.card_array.splice(i, 1);
+        }
+      }
+      //set the state, which re-renders the hand with the correct cards in it
+      this.setState(this.state);
+      console.log("FINAL HAND: " + JSON.stringify(this.state.card_array));
+  },
   // getDefaultProps: function() {
   //   return {
   //     name: 'Mary'
@@ -26,7 +34,7 @@ var Hand = React.createClass({
         this.state.card_array.map(function(cardNumber) {
           return React.createElement(
             Card,
-            {key: cardNumber.value.toString(), value: cardNumber.value, name: JSON.stringify(this.state)}//, callbackParent: this.toggleOnePointer} // props
+            {key: cardNumber.value.toString(), value: cardNumber.value, name: JSON.stringify(this.state), callbackParent: this.removeChild}// // props
           );
         }, this)
       );
@@ -34,7 +42,7 @@ var Hand = React.createClass({
     //if there is nothing in the hand, render some text
     return React.createElement(
       'ul',
-      {className: "hand row small-up-6", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
+      {className: "hand row small-up-6", onDragOver: this.allowDrop, onDrop: this.drop},
       "the hand is empty"
     );
   },
@@ -53,18 +61,18 @@ var Hand = React.createClass({
     this.setState(this.state);
     console.log("after state: " + JSON.stringify(this.state));
   },
-  onDragLeave: function(e) {
-    //remove the card from the hand when it is dragged out of the hand component
-    console.log("DISAPPEARING " + JSON.stringify(this.state));
-    console.log("INITIAL HAND: " + JSON.stringify(this.state.card_array));
-    for (var i = 0; i < this.state.card_array.length; i++) {
-      if (this.state.card_array[i].value == e.target.innerHTML) {
-        this.state.card_array.splice(i, 1);
-      }
-    }
-    //set the state, which re-renders the hand with the correct cards in it
-    this.setState(this.state);
-    console.log("FINAL HAND: " + JSON.stringify(this.state.card_array));
-    // TODO: why is this firing twice?
-  }
+  // onDragLeave: function(e) {
+  //   //remove the card from the hand when it is dragged out of the hand component
+  //   console.log("DISAPPEARING " + JSON.stringify(this.state));
+  //   console.log("INITIAL HAND: " + JSON.stringify(this.state.card_array));
+  //   for (var i = 0; i < this.state.card_array.length; i++) {
+  //     if (this.state.card_array[i].value == e.target.innerHTML) {
+  //       this.state.card_array.splice(i, 1);
+  //     }
+  //   }
+  //   //set the state, which re-renders the hand with the correct cards in it
+  //   this.setState(this.state);
+  //   console.log("FINAL HAND: " + JSON.stringify(this.state.card_array));
+  //   // TODO: why is this firing twice?
+  // }
 });

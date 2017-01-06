@@ -7,7 +7,7 @@ var Card = React.createClass({
   propTypes: {
     value: React.PropTypes.number,
     can_click: React.PropTypes.bool,
-    // callbackParent: React.PropTypes.func
+    callbackParent: React.PropTypes.func
   },
   // componentWillMount: function() {
   //   var token = PubSub.subscribe('start-dragging', function() {console.log("pubsub started dragging");});
@@ -20,9 +20,13 @@ var Card = React.createClass({
   render: function() {
     return React.createElement(
       'li',
-      {className: "number-card column", draggable: true, onDragStart: this.onDragStart, onDragEnd: this.onDragEnd},
+      {className: "number-card column", draggable: true, onDragStart: this.onDragStart, onDragEnd: this.onDragEnd, onMouseDown: this.clicked},
       this.state.value
     );
+  },
+  clicked: function() {
+    console.log("CLICKED");
+    this.props.callbackParent(this.state.value);
   },
   onDragStart: function(e) {
     console.log(this.props);
