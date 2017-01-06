@@ -1,9 +1,11 @@
 var Card = React.createClass({
   getInitialState: function() {
-    return {value: this.props.value};
+    return {value: this.props.value, clickable: this.props.can_click};
   },
   propTypes: {
-    value: React.PropTypes.number
+    value: React.PropTypes.number,
+    can_click: React.PropTypes.bool,
+    callbackParent: React.PropTypes.func
   },
   // getDefaultProps: function() {
   //   return {
@@ -18,13 +20,19 @@ var Card = React.createClass({
     );
   },
   onDragStart: function(e) {
+    console.log(this.props);
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData('text', JSON.stringify(this.state));
-    var currentElement = e;
+    this.props.callbackParent(this.state.value);
   },
   onDragEnd: function(e) {
     // remove from and rerender the hand
     // console.log("the selected is: " + this.state.selected);
     // this.state.items.splice(this.state.selected, 1);
-  }
+  },
+  // toggleOnePointerAllowed: function() {
+  //   console.log("toggleOnePointerAllowed called");
+  //   console.log(this.state.value);
+  //   this.props.callbackParent(this.state.value);
+  // }
 });

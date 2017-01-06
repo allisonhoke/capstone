@@ -9,6 +9,9 @@ var Hand = React.createClass({
   propTypes: {
     cardSet: React.PropTypes.array
   },
+  toggleOnePointer: function(value) {
+    console.log("GOT IN HERE TOO!!" + value);
+  },
   // getDefaultProps: function() {
   //   return {
   //     name: 'Mary'
@@ -23,9 +26,9 @@ var Hand = React.createClass({
         this.state.card_array.map(function(cardNumber) {
           return React.createElement(
             Card,
-            {key: cardNumber.value.toString(), value: cardNumber.value} // props
+            {key: cardNumber.value.toString(), value: cardNumber.value, name: JSON.stringify(this.state), callbackParent: this.toggleOnePointer} // props
           );
-        })
+        }, this)
       );
     }
     //if there is nothing in the hand, render some text
@@ -35,6 +38,7 @@ var Hand = React.createClass({
       "the hand is empty"
     );
   },
+
   allowDrop: function(e) {
     e.preventDefault();
   },
