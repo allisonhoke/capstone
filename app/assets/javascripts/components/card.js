@@ -5,8 +5,13 @@ var Card = React.createClass({
   propTypes: {
     value: React.PropTypes.number,
     can_click: React.PropTypes.bool,
-    callbackParent: React.PropTypes.func
+    // callbackParent: React.PropTypes.func
   },
+  // componentWillMount: function() {
+  //   globalBroadcaster.subscribe('dragging', function() {
+  //     console.log("heard the pubsub event" + this.state.value);
+  //   });
+  // },
   // getDefaultProps: function() {
   //   return {
   //     name: 'Mary'
@@ -23,7 +28,8 @@ var Card = React.createClass({
     console.log(this.props);
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData('text', JSON.stringify(this.state));
-    this.props.callbackParent(this.state.value);
+    // globalBroadcaster.publish('dragging');
+    // this.props.callbackParent(this.state.value);
   },
   onDragEnd: function(e) {
     // remove from and rerender the hand

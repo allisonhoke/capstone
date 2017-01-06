@@ -9,9 +9,9 @@ var Hand = React.createClass({
   propTypes: {
     cardSet: React.PropTypes.array
   },
-  toggleOnePointer: function(value) {
-    console.log("GOT IN HERE TOO!!" + value);
-  },
+  // toggleOnePointer: function(value) {
+  //   console.log("GOT IN HERE TOO!!" + value);
+  // },
   // getDefaultProps: function() {
   //   return {
   //     name: 'Mary'
@@ -26,7 +26,7 @@ var Hand = React.createClass({
         this.state.card_array.map(function(cardNumber) {
           return React.createElement(
             Card,
-            {key: cardNumber.value.toString(), value: cardNumber.value, name: JSON.stringify(this.state), callbackParent: this.toggleOnePointer} // props
+            {key: cardNumber.value.toString(), value: cardNumber.value, name: JSON.stringify(this.state)}//, callbackParent: this.toggleOnePointer} // props
           );
         }, this)
       );
