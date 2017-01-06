@@ -9,24 +9,30 @@ var Hand = React.createClass({
   propTypes: {
     cardSet: React.PropTypes.array
   },
-
   // getDefaultProps: function() {
   //   return {
   //     name: 'Mary'
   //   };
   // },
   render: function() {
-    // console.log("THE HAND HAS: " + JSON.stringify(this.state));
-    // render a ul that iterates through the props number set array and creates a card for each number
+    // if there is anything in the hand, render the cards
+    if (this.state.card_array.length > 0) {
+      return React.createElement(
+        'ul',
+        {className: "hand row small-up-6", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
+        this.state.card_array.map(function(cardNumber) {
+          return React.createElement(
+            Card,
+            {key: cardNumber.value.toString(), value: cardNumber.value} // props
+          );
+        })
+      );
+    }
+    //if there is nothing in the hand, render some text
     return React.createElement(
       'ul',
       {className: "hand row small-up-6", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
-      this.state.card_array.map(function(cardNumber) {
-        return React.createElement(
-          Card,
-          {key: cardNumber.value.toString(), value: cardNumber.value} // props
-        );
-      })
+      "the hand is empty"
     );
   },
   allowDrop: function(e) {
@@ -34,29 +40,26 @@ var Hand = React.createClass({
   },
   drop: function(e) {
     e.preventDefault();
+    //get the data that was transferred with the drag
     var data = JSON.parse(e.dataTransfer.getData('text'));
     console.log("Data is: " + JSON.stringify(data));
+    console.log("before state: " + JSON.stringify(this.state));
+    //add that data to the card array so the card is back in the hand
     this.state.card_array.push(data);
     this.setState(this.state);
-    // TODO: figure out how to put things back into the hand
-    // var datatwo = e.nativeEvent;
-    // console.log(datatwo);
-    // console.log("before state: " + JSON.stringify(this.state));
-    // this.state.item_array.push(data);
-    // this.setState(this.state);
-    // console.log("after state: " + JSON.stringify(this.state));
-    // console.log(e);
-    // e.target.append(data);
+    console.log("after state: " + JSON.stringify(this.state));
   },
   onDragLeave: function(e) {
+    //remove the card from the hand when it is dragged out of the hand component
     console.log("INITIAL HAND: " + JSON.stringify(this.state.card_array));
     for (var i = 0; i < this.state.card_array.length; i++) {
       if (this.state.card_array[i].value == e.target.innerHTML) {
         this.state.card_array.splice(i, 1);
       }
     }
+    //set the state, which re-renders the hand with the correct cards in it
     this.setState(this.state);
-    console.log("INITIAL HAND: " + JSON.stringify(this.state.card_array));
+    console.log("FINAL HAND: " + JSON.stringify(this.state.card_array));
+    // TODO: why is this firing twice?
   }
 });
-// JSON.stringify(this.state.card_array)
