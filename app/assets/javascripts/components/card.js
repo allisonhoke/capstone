@@ -20,13 +20,14 @@ var Card = React.createClass({
   render: function() {
     return React.createElement(
       'li',
-      {className: "number-card column", draggable: true, onDragStart: this.onDragStart, onDragEnd: this.onDragEnd, onMouseDown: this.clicked},
+      {className: "number-card column", draggable: true, onDragStart: this.onDragStart, onDragEnd: this.onDragEnd, onMouseDown: this.setCurrentCardForParent},
       this.state.value
     );
   },
-  clicked: function() {
-    console.log("CLICKED");
-    this.props.callbackParent(this.state.value);
+  setCurrentCardForParent: function() {
+    console.log("Setting current card for parent");
+    console.log(JSON.stringify(this.state));
+    this.props.callbackParent(this.state);
   },
   onDragStart: function(e) {
     console.log(this.props);

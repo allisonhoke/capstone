@@ -1,18 +1,23 @@
-
-
 var Hand = React.createClass({
   getInitialState: function() {
     return {card_array: this.props.data.cardSet.map(function(number) {
       return {value: number};
-    })};
+    }), current_card: this.props.current_card};
   },
   propTypes: {
     cardSet: React.PropTypes.array
   },
-  removeChild: function(value) {
-    console.log("GOT IN HERE TOO!!" + value);
+  getDefaultProps: function() {
+    return {
+      current_card: null
+    };
+  },
+  removeChild: function() {
+    console.log("GOT IN HERE TOO!!" + JSON.stringify(this.state.current_card));
+
+
     for (var i = 0; i < this.state.card_array.length; i++) {
-        if (this.state.card_array[i].value == value) {
+        if (this.state.card_array[i].value == this.state.current_card.value) {
           this.state.card_array.splice(i, 1);
         }
       }
@@ -20,21 +25,34 @@ var Hand = React.createClass({
       this.setState(this.state);
       console.log("FINAL HAND: " + JSON.stringify(this.state.card_array));
   },
-  // getDefaultProps: function() {
-  //   return {
-  //     name: 'Mary'
-  //   };
-  // },
+  onDragLeaveContainer: function(e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    var top    = e.currentTarget.offsetTop;
+    var bottom = top + e.currentTarget.offsetHeight;
+    var left   = e.currentTarget.offsetLeft;
+    var right  = left + e.currentTarget.offsetWidth;
+    if (y <= top || y >= bottom || x <= left || x >= right) {
+      console.log("dragleavecontainer");
+      this.removeChild();
+    }
+  },
+  setCurrentCard: function(card) {
+    // console.log("card passed to parent is: " + JSON.stringify(card));
+    this.state.current_card = card;
+    this.setState(this.state);
+  },
   render: function() {
+    // console.log(JSON.stringify(this.state));
     // if there is anything in the hand, render the cards
     if (this.state.card_array.length > 0) {
       return React.createElement(
         'ul',
-        {className: "hand row small-up-6", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
+        {className: "hand row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
         this.state.card_array.map(function(cardNumber) {
           return React.createElement(
             Card,
-            {key: cardNumber.value.toString(), value: cardNumber.value, name: JSON.stringify(this.state), callbackParent: this.removeChild}// // props
+            {key: cardNumber.value.toString(), value: cardNumber.value, name: JSON.stringify(this.state), callbackParent: this.setCurrentCard}// // props
           );
         }, this)
       );
