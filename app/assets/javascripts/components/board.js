@@ -6,31 +6,37 @@ var Board = React.createClass({
     toDisplay: React.PropTypes.string,
     items: React.PropTypes.array
   },
-  // getDefaultProps: function() {
-  //   return {
-  //     name: 'Mary'
-  //   };
-  // },
-  render: function() {
-    //if there is anything on the board, render it
-    if (this.state.item_array.length > 0) {
-      return React.createElement(
-        'section',
-        {className: "playing-board row small-up-6", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
-        this.state.item_array.map(function(card) {
-          return React.createElement(
-            Card,
-            {key: card.value.toString(), value: card.value}
-          );
-        })
-      );
+  getDefaultProps: function() {
+    return {
+      current_card: null
+    };
+  },
+  setCurrentCard: function(card) {
+    // console.log("BOARDcard passed to parent is: " + JSON.stringify(card));
+    this.state.current_card = card;
+    this.setState(this.state);
+  },
+  onDragLeaveContainer: function(e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    var top    = e.currentTarget.offsetTop;
+    var bottom = top + e.currentTarget.offsetHeight;
+    var left   = e.currentTarget.offsetLeft;
+    var right  = left + e.currentTarget.offsetWidth;
+    if (y <= top || y >= bottom || x <= left || x >= right) {
+      this.removeChild();
     }
-    //if there is nothing on the board, render the display attribute
-    return React.createElement(
-      'ul',
-      {className: "playing-board", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
-      this.state.display
-    );
+  },
+  removeChild: function() {
+    for (var i = 0; i < this.state.item_array.length; i++) {
+        if (this.state.item_array[i].value == this.state.current_card.value) {
+          this.state.item_array.splice(i, 1);
+        }
+      }
+      this.current_card = null;
+      //set the state, which re-renders the hand with the correct cards in it
+      this.setState(this.state);
+      console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
   },
   allowDrop: function(e) {
     e.preventDefault();
@@ -56,6 +62,27 @@ var Board = React.createClass({
     //set the state, which re-renders the board with the correct cards in it
     this.setState(this.state);
     // console.log("Final BOARD: " + JSON.stringify(this.state.item_array));
-  }
+  },
+  render: function() {
+    //if there is anything on the board, render it
+    if (this.state.item_array.length > 0) {
+      return React.createElement(
+        'section',
+        {className: "playing-board row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
+        this.state.item_array.map(function(card) {
+          return React.createElement(
+            Card,
+            {key: card.value.toString(), value: card.value, callbackParent: this.setCurrentCard}
+          );
+        }, this)//bind the board as this
+      );
+    }
+    //if there is nothing on the board, render the display attribute
+    return React.createElement(
+      'ul',
+      {className: "playing-board", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
+      this.state.display
+    );
+  },
   // TODO: why does this trigger twice?
 });
