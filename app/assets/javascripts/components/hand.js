@@ -31,7 +31,7 @@ var Hand = React.createClass({
     var left   = e.currentTarget.offsetLeft;
     var right  = left + e.currentTarget.offsetWidth;
     if (y <= top || y >= bottom || x <= left || x >= right) {
-      console.log("dragleavecontainer");
+      // console.log("dragleavecontainer");
       this.removeChild();
     }
   },
@@ -46,13 +46,13 @@ var Hand = React.createClass({
   drop: function(e) {
     e.preventDefault();
     //get the data that was transferred with the drag
-    var data = JSON.parse(e.dataTransfer.getData('text'));
-    console.log("Data is: " + JSON.stringify(data));
-    console.log("before state: " + JSON.stringify(this.state));
+    var data = JSON.parse(e.dataTransfer.getData('card'));
+    // console.log("Data is: " + JSON.stringify(data));
+    // console.log("before state: " + JSON.stringify(this.state));
     //add that data to the card array so the card is back in the hand
     this.state.card_array.push(data);
     this.setState(this.state);
-    console.log("after state: " + JSON.stringify(this.state));
+    // console.log("after state: " + JSON.stringify(this.state));
   },
   render: function() {
     // console.log(JSON.stringify(this.state));

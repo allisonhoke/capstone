@@ -20,14 +20,14 @@ var Card = React.createClass({
     );
   },
   setCurrentCardForParent: function() {
-    console.log("Setting current card for parent");
-    console.log(JSON.stringify(this.state));
+    // console.log("Setting current card for parent");
+    // console.log(JSON.stringify(this.state));
     this.props.callbackParent(this.state);
   },
   onDragStart: function(e) {
-    console.log(this.props);
+    // console.log(this.props);
     e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setData('text', JSON.stringify(this.state));
+    e.dataTransfer.setData('card', JSON.stringify(this.state));
   },
   onDragEnd: function(e) {
   //does anything need to happen here?

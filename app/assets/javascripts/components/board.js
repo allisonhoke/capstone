@@ -36,14 +36,14 @@ var Board = React.createClass({
       this.current_card = null;
       //set the state, which re-renders the hand with the correct cards in it
       this.setState(this.state);
-      console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
+      // console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
   },
   allowDrop: function(e) {
     e.preventDefault();
   },
   drop: function(e) {
     e.preventDefault();
-    var data = JSON.parse(e.dataTransfer.getData('text'));
+    var data = JSON.parse(e.dataTransfer.getData('card'));
     // console.log("before state: " + JSON.stringify(this.state));
     // add the card to the item array
     this.state.item_array.push(data);
