@@ -15,6 +15,7 @@ var Hand = React.createClass({
   removeChild: function() {
     for (var i = 0; i < this.state.card_array.length; i++) {
         if (this.state.card_array[i].value == this.state.current_card.value) {
+          console.log("removing index: " + i + " with value: " + this.state.card_array[i].value);
           this.state.card_array.splice(i, 1);
         }
       }
@@ -62,6 +63,7 @@ var Hand = React.createClass({
         'ul',
         {className: "hand row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
         this.state.card_array.map(function(cardNumber) {
+          // console.log("key is: " + key);
           return React.createElement(
             Card,
             {key: cardNumber.value.toString(), value: cardNumber.value, callbackParent: this.setCurrentCard}// // props
