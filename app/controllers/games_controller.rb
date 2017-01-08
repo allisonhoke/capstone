@@ -8,7 +8,8 @@ class GamesController < ApplicationController
     # @card_values = {cardSet: [0,1,2,3,4]}
     # TODO: how do you call the database???
     @dbset = Game.get_random_card_set
-    @card_values = {cardSet: @dbset}
+    @hand_info = {cardSet: @dbset}
+    @operator_hand_info = {cardSet: ["+", "-", "*", "/", "="]}
 
     @playing_board = {toDisplay: "THIS IS THE BOARD", items: []}
   end

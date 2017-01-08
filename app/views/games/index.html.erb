@@ -3,4 +3,6 @@ REACT
 
 <h1><%= "The set from Mongo is: #{ @dbset }" %></h1>
 
-<%= react_component 'Hand', { data: @card_values } %>
+<%= react_component 'Hand', { data: @operator_hand_info } %>
+
+<%= react_component 'Hand', { data: @hand_info } %>
