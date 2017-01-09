@@ -92,7 +92,7 @@ var Board = React.createClass({
         React.createElement(
           'div',
           {className: "submit-button", onClick: this.buttonClicked},
-          "THIS IS THE DIV THAT WE ARE CREATING"
+          "Submit"
           // Submit,
           // {key: cardNumber.value.toString(), value: cardNumber.value, callbackParent: this.setCurrentCard}
 
