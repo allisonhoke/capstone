@@ -1,6 +1,8 @@
-REACT
-<%= button_to "SAVE", action: "create" %>
+<% if flash[:notice] %>
+    <p class="flash-notice"><%= flash[:notice] %></p>
+<% end %>
 
+REACT
 <%= react_component 'Board', { data: @playing_board } %>
 
 <h1><%= "The set from Mongo is: #{ @dbset }" %></h1>

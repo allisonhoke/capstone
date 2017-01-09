@@ -43,3 +43,10 @@ li {
   border: solid black 2px;
   background-color: #395cc6;
 }
+
+.flash-notice {
+  border: solid black 2px;
+  background-color: black;
+  color: red;
+  font-weight: bold;
+}

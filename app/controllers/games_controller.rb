@@ -15,12 +15,16 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(cardset: params[:final_board])
+    @game = Game.new(cardset: params[:final_board]) #item_array
 
-    if @game.insert_document
-      render json: @game
+    if @game.check_valid_equation
+      if @game.insert_document
+        render json: @game
+      else
+        head 500 # OR OTHER ERROR CODE
+      end
     else
-      head 500 # OR OTHER ERROR CODE
+      flash[:notice] = "YOUR EQUATION IS INCORRECT - TRY AGAIN"
     end
   end
 

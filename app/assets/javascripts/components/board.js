@@ -49,7 +49,7 @@ var Board = React.createClass({
     this.state.item_array.push(data);
     //set the state, which re-renders the board component with the correct cards
     this.setState(this.state);
-    // console.log("after state: " + JSON.stringify(this.state));
+    console.log("after state: " + JSON.stringify(this.state));
   },
   onDragLeave: function(e) {
     // console.log("INITIAL BOARD: " + JSON.stringify(this.state.item_array));
@@ -64,7 +64,7 @@ var Board = React.createClass({
     // console.log("Final BOARD: " + JSON.stringify(this.state.item_array));
   },
   buttonClicked: function() {
-    console.log("THE BUTTON HAS BEEN CLICKED");
+    // console.log("THE BUTTON HAS BEEN CLICKED");
     fetch("/games", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -89,6 +89,7 @@ var Board = React.createClass({
             );
           }, this)//bind the board as this
         ),
+        //render a submit button if there is at least one element on the board
         React.createElement(
           'div',
           {className: "submit-button", onClick: this.buttonClicked},
@@ -98,16 +99,6 @@ var Board = React.createClass({
 
         )
       );
-      // React.createElement(
-      //   'ul',
-      //   {className: "playing-board row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
-      //   this.state.item_array.map(function(card) {
-      //     return React.createElement(
-      //       Card,
-      //       {key: card.value.toString(), value: card.value, callbackParent: this.setCurrentCard}
-      //     );
-      //   }, this)//bind the board as this
-      // );
     }
     //if there is nothing on the board, render the display attribute
     return React.createElement(
