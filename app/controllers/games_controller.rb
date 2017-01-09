@@ -15,12 +15,13 @@ class GamesController < ApplicationController
   end
 
   def create
-    # @game = Game.new(game_params)
-    # if @game.insert_document
-    # => render json: @game
-    # else
-    # => head 500 # OR OTHER ERROR CODE
-    # end
+    @game = Game.new(cardset: params[:final_board])
+
+    if @game.insert_document
+      render json: @game
+    else
+      head 500 # OR OTHER ERROR CODE
+    end
   end
 
   # private

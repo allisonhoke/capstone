@@ -63,19 +63,51 @@ var Board = React.createClass({
     this.setState(this.state);
     // console.log("Final BOARD: " + JSON.stringify(this.state.item_array));
   },
+  buttonClicked: function() {
+    console.log("THE BUTTON HAS BEEN CLICKED");
+    fetch("/games", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({final_board: this.state.item_array})
+    }).then(function(response) {
+      console.log("response received: " + JSON.stringify(response));
+    });
+  },
   render: function() {
     //if there is anything on the board, render it
     if (this.state.item_array.length > 0) {
       return React.createElement(
-        'section',
-        {className: "playing-board row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
-        this.state.item_array.map(function(card) {
-          return React.createElement(
-            Card,
-            {key: card.value.toString(), value: card.value, callbackParent: this.setCurrentCard}
-          );
-        }, this)//bind the board as this
+        'div',
+        null,
+        React.createElement(
+          'ul',
+          {className: "playing-board row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
+          this.state.item_array.map(function(card) {
+            return React.createElement(
+              Card,
+              {key: card.value.toString(), value: card.value, callbackParent: this.setCurrentCard}
+            );
+          }, this)//bind the board as this
+        ),
+        React.createElement(
+          'div',
+          {className: "submit-button", onClick: this.buttonClicked},
+          "THIS IS THE DIV THAT WE ARE CREATING"
+          // Submit,
+          // {key: cardNumber.value.toString(), value: cardNumber.value, callbackParent: this.setCurrentCard}
+
+        )
       );
+      // React.createElement(
+      //   'ul',
+      //   {className: "playing-board row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
+      //   this.state.item_array.map(function(card) {
+      //     return React.createElement(
+      //       Card,
+      //       {key: card.value.toString(), value: card.value, callbackParent: this.setCurrentCard}
+      //     );
+      //   }, this)//bind the board as this
+      // );
     }
     //if there is nothing on the board, render the display attribute
     return React.createElement(

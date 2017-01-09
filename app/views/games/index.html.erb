@@ -1,4 +1,6 @@
 REACT
+<%= button_to "SAVE", action: "create" %>
+
 <%= react_component 'Board', { data: @playing_board } %>
 
 <h1><%= "The set from Mongo is: #{ @dbset }" %></h1>
