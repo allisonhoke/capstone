@@ -1,14 +1,16 @@
 var Board = React.createClass({
   getInitialState: function() {
-    return {display: this.props.data.toDisplay, item_array: this.props.data.items};
+    return {display: this.props.data.toDisplay, item_array: this.props.data.items, message: this.props.message};
   },
   propTypes: {
     toDisplay: React.PropTypes.string,
-    items: React.PropTypes.array
+    items: React.PropTypes.array,
+    message: React.PropTypes.string
   },
   getDefaultProps: function() {
     return {
-      current_card: null
+      current_card: null,
+      message: "WELCOME!"
     };
   },
   setCurrentCard: function(card) {
@@ -90,10 +92,15 @@ var Board = React.createClass({
   },
   render: function() {
     //if there is anything on the board, render it
+    // console.log("MESSAGE IS: " + this.state.message);
     if (this.state.item_array.length > 0) {
       return React.createElement(
-        'div',
+        'article',
         null,
+        React.createElement(
+          Message,
+          {message: this.state.message}
+        ),
         React.createElement(
           'ul',
           {className: "playing-board row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
@@ -106,7 +113,7 @@ var Board = React.createClass({
         ),
         //render a submit button if there is at least one element on the board
         React.createElement(
-          'div',
+          'div', // TODO: fix this shit
           {className: "submit-button", onClick: this.buttonClicked},
           "Submit"
           // Submit,
@@ -125,10 +132,17 @@ var Board = React.createClass({
     }
     //if there is nothing on the board, render the display attribute
     return React.createElement(
-      'ul',
-      {className: "playing-board", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
-      this.state.display
+      'article',
+      null,
+      React.createElement(
+        Message,
+        {message: this.state.message}
+      ),
+      React.createElement(
+        'ul',
+        {className: "playing-board", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
+        this.state.display
+      )
     );
-  },
-  // TODO: why does this trigger twice?
+  }
 });

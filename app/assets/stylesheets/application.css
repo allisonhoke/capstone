@@ -44,9 +44,8 @@ li {
   background-color: #395cc6;
 }
 
-.flash-notice {
+.message-box {
   border: solid black 2px;
-  background-color: black;
-  color: red;
-  font-weight: bold;
+  background-color: lightyellow;
+  height: 2em;
 }
