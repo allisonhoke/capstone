@@ -24,7 +24,7 @@ class GamesController < ApplicationController
         head 500 # OR OTHER ERROR CODE
       end
     else
-      flash[:notice] = "YOUR EQUATION IS INCORRECT - TRY AGAIN"
+      head 400
     end
   end
 
