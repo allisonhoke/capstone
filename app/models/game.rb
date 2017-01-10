@@ -26,22 +26,29 @@ class Game
     end
   end
 
-  def self.check_valid_equation
+  def check_valid_equation
     board = self.cardset
     values = []
-  #put the values in the array
+
+    #put the values in the array
     board.each do |card| #each card is a object/hash {value: "value"}
       values << card[:value]
     end
 
+    #get the target value alone
     target = values.pop
+    #join the rest of the values array WITHOUT the `=`
     equation_str = values[0..-2].join
 
-    if eval(equation_str) == target.to_i
-      return true
-    else
-      return false
+    #if the target is a number
+    if target =~ /\d/
+      #evaluate the equation
+      if eval(equation_str) == target.to_i
+        return true
+      end
     end
-    #TODO join into one string and then evaluate the equation
+
+    return false
+
   end
 end
