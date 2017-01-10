@@ -63,6 +63,11 @@ var Board = React.createClass({
     this.setState(this.state);
     // console.log("Final BOARD: " + JSON.stringify(this.state.item_array));
   },
+  handleErrors: function(response) {
+    if (!response.ok) {
+
+    }
+  },
   buttonClicked: function() {
     // console.log("THE BUTTON HAS BEEN CLICKED");
     fetch("/games", {
@@ -70,7 +75,17 @@ var Board = React.createClass({
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({final_board: this.state.item_array})
     }).then(function(response) {
-      console.log("response received: " + JSON.stringify(response));
+      // TODO: create an element that displays the error
+      // if (!response.ok) {
+      //   return React.createElement(
+      //     'div',
+      //     {className: "error-box"},
+      //     response.message
+      //   );
+      // }
+    })
+      .then(function(response) {
+      console.log(response);
     });
   },
   render: function() {
@@ -98,6 +113,14 @@ var Board = React.createClass({
           // {key: cardNumber.value.toString(), value: cardNumber.value, callbackParent: this.setCurrentCard}
 
         )
+        // TODO: render an element if there are errors
+        // if (this.state.invalid_solution === true) {
+        //   React.createElement(
+        //     'div',
+        //     {className: "error-box", onClick: this.removeErrorBox},
+        //     "Solution invalid. Please try again."
+        //   )
+        // }
       );
     }
     //if there is nothing on the board, render the display attribute

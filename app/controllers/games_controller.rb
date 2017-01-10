@@ -24,8 +24,8 @@ class GamesController < ApplicationController
         head 500 # OR OTHER ERROR CODE
       end
     else
-      head 400
-      # render json: {message: "WRONG"}
+      # head 400
+      render json: {message: "WRONG"}
     end
   end
 
