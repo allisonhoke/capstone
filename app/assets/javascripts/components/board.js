@@ -74,7 +74,7 @@ var Board = React.createClass({
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({final_board: this.state.item_array})
-    }).then(function(response) {
+    })//.then(function(response) {
       // TODO: create an element that displays the error
       // if (!response.ok) {
       //   return React.createElement(
@@ -83,7 +83,7 @@ var Board = React.createClass({
       //     response.message
       //   );
       // }
-    })
+    // })
       .then(function(response) {
       console.log(response);
     });
