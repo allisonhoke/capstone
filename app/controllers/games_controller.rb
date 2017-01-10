@@ -25,6 +25,7 @@ class GamesController < ApplicationController
       end
     else
       head 400
+      # render json: {message: "WRONG"}
     end
   end
 
