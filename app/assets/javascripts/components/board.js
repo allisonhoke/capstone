@@ -114,12 +114,8 @@ var Board = React.createClass({
         ),
         //render a submit button if there is at least one element on the board
         React.createElement(
-          'div', // TODO: fix this shit
-          {className: "submit-button", onClick: this.buttonClicked},
-          "Submit"
-          // Submit,
-          // {key: cardNumber.value.toString(), value: cardNumber.value, callbackParent: this.setCurrentCard}
-
+          Submit,
+          {callbackParent: this.buttonClicked}
         )
       );
     }
