@@ -28,6 +28,10 @@ gem 'bson_ext'
 #react
 gem 'react-rails', '~> 1.0'
 
+#omniauth
+gem "omniauth"
+gem 'omniauth-facebook'
+
 #browserify
 gem "browserify-rails"
 
@@ -52,4 +56,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'dotenv-rails'
 end
