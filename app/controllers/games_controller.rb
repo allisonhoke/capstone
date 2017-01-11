@@ -16,6 +16,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(cardset: params[:final_board]) #item_array
+    @message = {message: "WRONG"}
 
     if @game.check_valid_equation
       if @game.insert_document
@@ -25,7 +26,7 @@ class GamesController < ApplicationController
       end
     else
       # head 400
-      render json: {message: "WRONG"}
+      render json: @message
     end
   end
 

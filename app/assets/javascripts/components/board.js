@@ -51,7 +51,7 @@ var Board = React.createClass({
     this.state.item_array.push(data);
     //set the state, which re-renders the board component with the correct cards
     this.setState(this.state);
-    console.log("after state: " + JSON.stringify(this.state));
+    // console.log("after state: " + JSON.stringify(this.state));
   },
   onDragLeave: function(e) {
     // console.log("INITIAL BOARD: " + JSON.stringify(this.state.item_array));
@@ -65,51 +65,52 @@ var Board = React.createClass({
     this.setState(this.state);
     // console.log("Final BOARD: " + JSON.stringify(this.state.item_array));
   },
-  handleErrors: function(response) {
-    if (!response.ok) {
-
+  handleData: function(data) {
+    if (data.cardset) {
+      this.state.message = "CORRECT!";
+      this.setState(this.state);
+    } else {
+      this.state.message = data.message;
+      this.setState(this.state);
     }
   },
   buttonClicked: function() {
-    // console.log("THE BUTTON HAS BEEN CLICKED");
+    var a = this;
+
     fetch("/games", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({final_board: this.state.item_array})
-    })//.then(function(response) {
-      // TODO: create an element that displays the error
-      // if (!response.ok) {
-      //   return React.createElement(
-      //     'div',
-      //     {className: "error-box"},
-      //     response.message
-      //   );
-      // }
-    // })
-      .then(function(response) {
-      console.log(response);
+    }).then(function(response) {
+      return response.json();
+    })
+    .then(function(myJson) {
+      console.log("JSON IS: " + JSON.stringify(myJson));
+      a.handleData(myJson);
     });
   },
   render: function() {
     //if there is anything on the board, render it
-    // console.log("MESSAGE IS: " + this.state.message);
     if (this.state.item_array.length > 0) {
       return React.createElement(
         'article',
         null,
+        //create a message element to display win or lose
         React.createElement(
           Message,
-          {message: this.state.message}
+          {key: this.state.message, display: this.state.message}
         ),
+        //create a ul to hold the cards
         React.createElement(
           'ul',
           {className: "playing-board row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
           this.state.item_array.map(function(card) {
+            //create a card for each item in the item_array
             return React.createElement(
               Card,
               {key: card.value.toString(), value: card.value, callbackParent: this.setCurrentCard}
             );
-          }, this)//bind the board as this
+          }, this) //bind the board as this
         ),
         //render a submit button if there is at least one element on the board
         React.createElement(
@@ -120,14 +121,6 @@ var Board = React.createClass({
           // {key: cardNumber.value.toString(), value: cardNumber.value, callbackParent: this.setCurrentCard}
 
         )
-        // TODO: render an element if there are errors
-        // if (this.state.invalid_solution === true) {
-        //   React.createElement(
-        //     'div',
-        //     {className: "error-box", onClick: this.removeErrorBox},
-        //     "Solution invalid. Please try again."
-        //   )
-        // }
       );
     }
     //if there is nothing on the board, render the display attribute
@@ -136,7 +129,7 @@ var Board = React.createClass({
       null,
       React.createElement(
         Message,
-        {message: this.state.message}
+        {display: this.state.message}
       ),
       React.createElement(
         'ul',
