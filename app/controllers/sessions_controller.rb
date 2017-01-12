@@ -12,8 +12,8 @@ class SessionsController < ApplicationController
       # render :creation_failure and return unless @user.save
     end
 
-    session[:user_id] = @user.id
-    redirect_to games_path and return
+    session[:user_id] = @user[:_id]
+    redirect_to user_path(id: @user[:_id])
   end
 
   def destroy
