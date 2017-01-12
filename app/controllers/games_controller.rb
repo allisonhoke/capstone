@@ -12,6 +12,12 @@ class GamesController < ApplicationController
     @operator_hand_info = {cardSet: ["+", "-", "*", "/", "="]}
 
     @playing_board = {toDisplay: "THIS IS THE BOARD", items: []}
+
+    if session[:user_id]
+      @user = User.find_user(session[:user_id])
+    else
+      @user = {name: "no one"}
+    end
   end
 
   def create
