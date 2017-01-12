@@ -2,8 +2,8 @@ class Game
   include Mongoid::Document
   field :timestart, type: Date
   field :timefinish, type: Date
-  field :level, type: Fixnum
-  field :user, type: Hash
+  field :level, type: String
+  field :user, type: String
   field :cardset, type: Array
 
   def self.get_random_card_set

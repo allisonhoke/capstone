@@ -21,8 +21,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(cardset: params[:final_board], user: session[:user_id]) #item_array
-
+    @game = Game.new(cardset: params[:final_board], user: params[:user_id], level: "level") #item_array
 
     @message = {message: "WRONG"}
 
