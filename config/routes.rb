@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  resources :games
-  resources :users, only: [:show]
+
+  resources :games, only: [:index, :create]
+
+  resources :users, only: [:show] do
+    resources :games, only: [:index, :create]
+  end
 
 
   get '/auth/:provider/callback', to: 'sessions#create'
