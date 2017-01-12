@@ -1,15 +1,9 @@
 class GamesController < ApplicationController
   def index
-    # find a random card set from the database
-    # make it an @variable that you will referece in the view
-    # the object will have properties that you reference by
-    # var = db.collectionname.find()
-    # var["attribute(key in the DB)"]
-    # @card_values = {cardSet: [0,1,2,3,4]}
-    # TODO: how do you call the database???
     @dbset = Game.get_random_card_set
     @hand_info = {cardSet: @dbset}
     @operator_hand_info = {cardSet: ["+", "-", "*", "/", "="]}
+    # TODO: add () to operator hand
 
     @playing_board = {toDisplay: "THIS IS THE BOARD", items: []}
 
@@ -22,6 +16,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(cardset: params[:final_board], user: params[:user_id], level: "level") #item_array
+    @cardset = Cardset.new(set: Cardset.get_nums_only(params[:final_board])) # returns array of strings of numbers
     
     @message = {message: "WRONG"}
 
