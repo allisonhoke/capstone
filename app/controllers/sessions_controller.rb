@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if :current_user
+    if session[:user_id]
       session.delete(:user_id)
       flash[:success] = 'See you!'
     end
