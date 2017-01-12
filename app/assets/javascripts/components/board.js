@@ -89,12 +89,20 @@ var Board = React.createClass({
       a.handleData(myJson);
     });
   },
+  newGame: function() {
+    window.location.reload();
+  },
   render: function() {
     //if there is anything on the board, render it
     if (this.state.item_array.length > 0) {
       return React.createElement(
         'article',
         null,
+        // create a new game button
+        React.createElement(
+          Button,
+          {display: "New Game", callbackParent: this.newGame}
+        ),
         //create a message element to display win or lose
         React.createElement(
           Message,
@@ -114,8 +122,8 @@ var Board = React.createClass({
         ),
         //render a submit button if there is at least one element on the board
         React.createElement(
-          Submit,
-          {callbackParent: this.buttonClicked}
+          Button,
+          {display: "Submit", callbackParent: this.buttonClicked}
         )
       );
     }
@@ -123,6 +131,10 @@ var Board = React.createClass({
     return React.createElement(
       'article',
       null,
+      React.createElement(
+        Button,
+        {display: "New Game", callbackParent: this.newGame}
+      ),
       React.createElement(
         Message,
         {display: this.state.message}

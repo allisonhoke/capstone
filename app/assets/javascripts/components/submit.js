@@ -1,4 +1,4 @@
-var Submit = React.createClass({
+var Button = React.createClass({
   getInitialState: function() {
     return {display: this.props.display};
   },
@@ -7,13 +7,13 @@ var Submit = React.createClass({
   },
   getDefaultProps: function() {
     return {
-      display: "Submit"
+      display: null
     };
   },
   render: function() {
     return React.createElement(
       'div',
-      {className: "submit-button", onClick: this.props.callbackParent},
+      {className: "button", onClick: this.props.callbackParent},
       this.state.display
     );
   }
