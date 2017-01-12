@@ -8,9 +8,15 @@ RSpec.describe Cardset, type: :model do
     expect(Cardset.get_nums_only(test_board)).to eq(["3", "5", "8"])
   end
 
-  # it "#already_in_collection should return true if the cardset is already in the collection" do
-  #   test_cardset = Cardset.new(set: [{value: "3"}, {value: "2"}, {value: "5"}, {value: "1"}, {value: "8"}])
-  #
-  #   expect(test_cardset.already_in_collection).to eq(true)
-  # end
+  it "self.already_in_collection should return true if the cardset is already in the collection" do
+    test_set = ["3", "2", "5", "1", "8"]
+
+    expect(Cardset.already_in_collection(test_set)).to eq(true)
+  end
+
+  it "self.already_in_collection should return false if the cardset is not in the collection" do
+    test_set = ["32", "2", "500", "1", "8"]
+
+    expect(Cardset.already_in_collection(test_set)).to eq(false)
+  end
 end

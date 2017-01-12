@@ -18,10 +18,17 @@ class Cardset
   end
 
 
-  def already_in_collection
+  def self.already_in_collection(set_of_cards)
     client = Mongoid::Clients.default
     collection = client[:cardsets]
 
+    # total_in_collection =
 
+    # return total_in_collection
+    if collection.find({set: set_of_cards}).nil?
+      return false
+    else
+      return true
+    end
   end
 end
