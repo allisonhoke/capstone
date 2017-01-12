@@ -74,10 +74,20 @@ var Board = React.createClass({
       this.setState(this.state);
     }
   },
+  loggedInOrNot: function() {
+    if (window.location.href == "http://localhost:3000/games") {
+      return "/games";
+    } else {
+      var fullPath = window.location.href;
+      var beg = fullPath.indexOf("users");
+      var end = fullPath.indexOf("#_=_");
+      return fullPath.substr((beg + 5), end);
+    }
+  },
   buttonClicked: function() {
     var a = this;
 
-    fetch("/games", {
+    fetch(a.loggedInOrNot(), {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({final_board: this.state.item_array})
