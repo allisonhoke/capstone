@@ -21,7 +21,9 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(cardset: params[:final_board]) #item_array
+    @game = Game.new(cardset: params[:final_board], user: session[:user_id]) #item_array
+
+
     @message = {message: "WRONG"}
 
     if @game.check_valid_equation

@@ -3,7 +3,7 @@ class Game
   field :timestart, type: Date
   field :timefinish, type: Date
   field :level, type: Fixnum
-  field :user, type: String
+  field :user, type: Hash
   field :cardset, type: Array
 
   def self.get_random_card_set
@@ -19,7 +19,7 @@ class Game
     client = Mongoid::Clients.default
     collection = client[:games]
 
-    if collection.insert_one(timestart: self.timestart, level: self.level, cardset: self.cardset)
+    if collection.insert_one(timestart: self.timestart, level: self.level, cardset: self.cardset, user: self.user)
       return true
     else
       return false

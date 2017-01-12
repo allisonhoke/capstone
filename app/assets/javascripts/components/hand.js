@@ -15,7 +15,7 @@ var Hand = React.createClass({
   removeChild: function() {
     for (var i = 0; i < this.state.card_array.length; i++) {
         if (this.state.card_array[i].value == this.state.current_card.value) {
-          console.log("removing index: " + i + " with value: " + this.state.card_array[i].value);
+          // console.log("removing index: " + i + " with value: " + this.state.card_array[i].value);
           this.state.card_array.splice(i, 1);
         }
       }
