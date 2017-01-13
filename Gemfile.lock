@@ -221,7 +221,7 @@ DEPENDENCIES
   dotenv-rails
   jbuilder (~> 2.0)
   jquery-rails
-  mongoid
+  mongoid (~> 5.0)
   omniauth
   omniauth-facebook
   rails (= 4.2.7)
