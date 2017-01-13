@@ -14,7 +14,7 @@ class Cardset
       end
     end
 
-    return values #array of strings
+    return values.join(",") #string of numbers
   end
 
 
@@ -22,10 +22,10 @@ class Cardset
     client = Mongoid::Clients.default
     collection = client[:cardsets]
 
-    # total_in_collection =
+    total_in_collection = collection.find({set: set_of_cards}).count()
 
     # return total_in_collection
-    if collection.find({set: set_of_cards}).nil?
+    if total_in_collection > 0
       return false
     else
       return true
