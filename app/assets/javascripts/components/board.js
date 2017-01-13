@@ -1,16 +1,19 @@
 var Board = React.createClass({
   getInitialState: function() {
-    return {display: this.props.data.toDisplay, item_array: this.props.data.items, message: this.props.message};
+    return {display: this.props.data.toDisplay, item_array: this.props.data.items, message: this.props.message, startTime: this.props.startTime, endTime: this.props.endTime};
   },
   propTypes: {
     toDisplay: React.PropTypes.string,
     items: React.PropTypes.array,
-    message: React.PropTypes.string
+    message: React.PropTypes.string,
+    startTime: React.PropTypes.any,
+    endTime: React.PropTypes.any
   },
   getDefaultProps: function() {
     return {
       current_card: null,
-      message: "WELCOME!"
+      message: "WELCOME!",
+      startTime: new Date()
     };
   },
   setCurrentCard: function(card) {
@@ -90,7 +93,7 @@ var Board = React.createClass({
     fetch(a.loggedInOrNot(), {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({final_board: this.state.item_array})
+      body: JSON.stringify({final_board: this.state.item_array, endTime: new Date(), startTime: this.state.startTime}) //add starttiem endtime
     }).then(function(response) {
       return response.json();
     })

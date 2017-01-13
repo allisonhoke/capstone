@@ -19,7 +19,7 @@ class Game
     client = Mongoid::Clients.default
     collection = client[:games]
 
-    if collection.insert_one(timestart: self.timestart, level: self.level, cardset: self.cardset, user: self.user)
+    if collection.insert_one(timestart: self.timestart, timefinish: self.timefinish, level: self.level, cardset: self.cardset, user: self.user)
       return true
     else
       return false

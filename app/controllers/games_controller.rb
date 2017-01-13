@@ -15,9 +15,9 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(cardset: params[:final_board], user: params[:user_id], level: "level") #item_array
-    @cardset = Cardset.new(set: Cardset.get_nums_only(params[:final_board])) # returns array of strings of numbers
-    
+    @game = Game.new(cardset: params[:final_board], user: params[:user_id], level: "level", timestart: params[:startTime], timefinish: params[:endTime]) #item_array
+    # @cardset = Cardset.new(set: Cardset.get_nums_only(params[:final_board])) # returns array of strings of numbers
+
     @message = {message: "WRONG"}
 
     if @game.check_valid_equation
