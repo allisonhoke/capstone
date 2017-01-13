@@ -27,9 +27,9 @@ class Cardset
 
     # return total_in_collection
     if total_in_collection > 0
-      return false
-    else
       return true
+    else
+      return false
     end
   end
 end
