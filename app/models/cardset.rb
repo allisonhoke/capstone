@@ -21,8 +21,9 @@ class Cardset
   def self.already_in_collection(set_of_cards)
     client = Mongoid::Clients.default
     collection = client[:cardsets]
+    cards = set_of_cards
 
-    total_in_collection = collection.find({set: set_of_cards}).count()
+    total_in_collection = collection.find({"set": cards}).count()
 
     # return total_in_collection
     if total_in_collection > 0

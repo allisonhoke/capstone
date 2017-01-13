@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 #mongo
-gem "mongoid", '~> 5.0'
+gem "mongoid", git: 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
 
 #react
