@@ -16,6 +16,11 @@ var Board = React.createClass({
       startTime: new Date()
     };
   },
+  // getTime: function() {
+  //   var date = new Date();
+  //   var time = date.getTime();
+  //   return time;
+  // },
   setCurrentCard: function(card) {
     // console.log("BOARDcard passed to parent is: " + JSON.stringify(card));
     this.state.current_card = card;
