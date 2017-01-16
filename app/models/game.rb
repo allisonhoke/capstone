@@ -51,4 +51,13 @@ class Game
     return false
 
   end
+
+  def self.find_games_by_user(id)
+    better_id = id["$oid"]
+    client = Mongoid::Clients.default
+    collection = client[:games]
+
+    user_games = collection.find({user: better_id}) #array of games
+    return user_games
+  end
 end

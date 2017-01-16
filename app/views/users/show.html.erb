@@ -2,3 +2,7 @@ DASHBOARD FOR user: <%= @user["name"]%>
 <%= link_to "PLAY", user_games_path(@user[:_id]) %>
 <%#= "Provider: " + @user.provider%>
 <%#= "Number of completed puzzles: " + @user.num_puzzles%>
+
+<% @games.each do |game| %>
+<p><%= game %></p>
+<% end %>
