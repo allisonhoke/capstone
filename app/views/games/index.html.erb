@@ -7,14 +7,8 @@ Current user is: <%= @user["name"]%>
 <% end %>
 
 
-
-
-
-
 <%= react_component 'Board', { data: @playing_board } %>
 
 <%= react_component 'Hand', { data: @operator_hand_info } %>
 
 <%= react_component 'Hand', { data: @hand_info } %>
-
-<h1><%= "The set from Mongo is: #{ @dbset }" %></h1>
