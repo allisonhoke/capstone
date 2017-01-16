@@ -6,15 +6,6 @@ class Game
   field :user, type: String
   field :cardset, type: Array
 
-  def self.get_random_card_set
-    # TODO: actually get a random set rather than the only one that is in the DB
-    client = Mongoid::Clients.default
-    collection = client[:games]
-
-    set_of_cards = collection.find({level: "easy"}).first[:cardset]
-    return set_of_cards
-  end
-
   def insert_document #passed in as hash
     client = Mongoid::Clients.default
     collection = client[:games]

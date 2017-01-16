@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
   def index
-    @dbset = Game.get_random_card_set
+    @dbset = Cardset.all.sample[:set]
+
     @hand_info = {cardSet: @dbset}
     @operator_hand_info = {cardSet: ["+", "-", "*", "/", "="]}
     # TODO: add () to operator hand
