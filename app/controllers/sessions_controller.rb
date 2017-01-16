@@ -19,7 +19,6 @@ class SessionsController < ApplicationController
   def destroy
     if session[:user_id]
       session.delete(:user_id)
-      flash[:success] = 'See you!'
     end
     redirect_to games_path
   end

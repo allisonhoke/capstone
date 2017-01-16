@@ -1,9 +1,13 @@
-<%= link_to 'Facebook', '/auth/facebook' %>
-
+<% if session[:user_id] %>
+Current user is: <%= @user["name"]%>
 <%= link_to 'Log Out', logout_path, method: :delete %>
+<%= link_to 'User Dashboard', user_path(@user[:_id]) %>
+<% else %>
+<%= link_to 'Log in with Facebook', '/auth/facebook' %>
+<% end %>
 
 
-  Current user is: <%= @user["name"]%>
+
 
 
 
