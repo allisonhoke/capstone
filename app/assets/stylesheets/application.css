@@ -15,7 +15,7 @@
  */
 li {
   border: solid black 2px;
-  height: 6em;
+  font-size: 2em;
   list-style: none;
   margin: .3em;
   text-align: center;
@@ -35,7 +35,6 @@ li {
   background-color: #59a693;
   border: solid black 2px;
   height: 10em;
-  width: 80%;
   margin: auto;
 }
 
@@ -48,4 +47,9 @@ li {
   border: solid black 2px;
   background-color: lightyellow;
   height: 2em;
+}
+
+.equal {
+  height: 10em;
+  display: inline;
 }

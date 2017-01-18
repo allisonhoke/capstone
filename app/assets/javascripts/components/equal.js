@@ -12,7 +12,7 @@ var Equal = React.createClass({
   },
   render: function() {
     return React.createElement(
-        'div',
+        'ul',
         {className: "equal column"},
         this.state.display
     );

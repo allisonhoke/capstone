@@ -83,7 +83,7 @@ var Board = React.createClass({
         ),
         React.createElement(
           'div',
-          {className: "playing-area row small-up-4"},
+          {className: "playing-area row small-up-3"},
         //create a ul to hold the cards
           React.createElement(
             Field,
