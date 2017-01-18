@@ -15,13 +15,15 @@ var Board = React.createClass({
     };
   },
   handleData: function(data) {
-    if (data.cardset) {
+    // console.log("DATA is: " + JSON.stringify(data));
+    if (data.board) {
       this.state.message = "CORRECT!";
       this.setState(this.state);
     } else {
       this.state.message = data.message;
       this.setState(this.state);
     }
+    console.log(this.state.message);
   },
   loggedInOrNot: function() {
     if (window.location.href == "http://localhost:3000/games") {
@@ -36,12 +38,24 @@ var Board = React.createClass({
   buttonClicked: function() {
     var a = this;
     var cardsOnBoard = this.refs.field.state.item_array;
-    var boardTarget = this.refs.target.state.item.value;
+    var boardTarget = this.refs.target.state.item;
+
+
+    if (cardsOnBoard.length === 0) {
+      this.state.message = "Oops, you must create an equation with the cards!";
+      this.setState(this.state);
+      return ;
+    } else if (boardTarget === null) {
+      this.state.message = "Please set a target card";
+      this.setState(this.state);
+      return ;
+    }
+
 
     fetch(a.loggedInOrNot(), {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({final_board: cardsOnBoard, target: boardTarget, endTime: new Date(), startTime: this.state.startTime}) //add starttiem endtime
+      body: JSON.stringify({final_board: cardsOnBoard, target: boardTarget.value, endTime: new Date(), startTime: this.state.startTime}) //add starttiem endtime
     }).then(function(response) {
       return response.json();
     })
