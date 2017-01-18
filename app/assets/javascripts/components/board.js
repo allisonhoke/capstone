@@ -35,6 +35,8 @@ var Board = React.createClass({
   },
   buttonClicked: function() {
     var a = this;
+    var cardsOnBoard = this.refs.field.state.item_array;
+    var boardTarget = this.refs.target.state.item.value;
 
     fetch(a.loggedInOrNot(), {
       method: "POST",
@@ -71,11 +73,11 @@ var Board = React.createClass({
         //create a ul to hold the cards
           React.createElement(
             Field,
-            {toDisplay: "Place cards here", item_array: this.state.items}
+            {ref: "field", toDisplay: "Place cards here", item_array: this.state.items}
           ),
           React.createElement(
             Target,
-            {toDisplay: "Place the target here"}
+            {ref: "target", toDisplay: "Place the target here"}
           )
         ),
         //render a submit button if there is at least one element on the board

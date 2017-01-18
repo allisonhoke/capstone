@@ -5,7 +5,7 @@ class Game
   field :level, type: String
   field :user, type: String
   field :board, type: Array
-  field :target, type: Hash
+  field :target, type: String
 
   def insert_document #passed in as hash
     client = Mongoid::Clients.default
@@ -20,7 +20,7 @@ class Game
 
   def check_valid_equation
     board = self.board
-    target = self.target.value
+    target = self.target
     values = []
 
     #put the values in the array
@@ -36,13 +36,12 @@ class Game
     #if the target is a number
     if target =~ /\d/
       #evaluate the equation
-      if eval(equation_str) == target.to_i
+      if eval(values.join) == target.to_i
         return true
       end
     end
 
     return false
-
   end
 
   def self.find_games_by_user(id)
