@@ -3,7 +3,7 @@ class GamesController < ApplicationController
     @dbset = Cardset.all.sample[:set]
 
     @hand_info = {cardSet: @dbset}
-    @operator_hand_info = {cardSet: ["+", "-", "*", "/", "="]}
+    @operator_hand_info = {cardSet: ["+", "-", "*", "/", "(", ")"]}
     # TODO: add () to operator hand
 
     @playing_board = {items: []}
