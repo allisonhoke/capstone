@@ -6,7 +6,7 @@ class GamesController < ApplicationController
     @operator_hand_info = {cardSet: ["+", "-", "*", "/", "="]}
     # TODO: add () to operator hand
 
-    @playing_board = {toDisplay: "THIS IS THE BOARD", items: []}
+    @playing_board = {items: []}
 
     if session[:user_id]
       @user = User.find_user(session[:user_id])
@@ -16,7 +16,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(cardset: params[:final_board], user: params[:user_id], level: "level", timestart: params[:startTime], timefinish: params[:endTime]) #item_array
+    @game = Game.new(board: params[:final_board], target: params[:target], user: params[:user_id], level: "level", timestart: params[:startTime], timefinish: params[:endTime]) #item_array
     # @cardset = Cardset.new(set: Cardset.get_nums_only(params[:final_board])) # returns array of strings of numbers
 
     @message = {message: "WRONG"}

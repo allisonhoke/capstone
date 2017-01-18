@@ -4,13 +4,14 @@ class Game
   field :timefinish, type: Date
   field :level, type: String
   field :user, type: String
-  field :cardset, type: Array
+  field :board, type: Array
+  field :target, type: Hash
 
   def insert_document #passed in as hash
     client = Mongoid::Clients.default
     collection = client[:games]
 
-    if collection.insert_one(timestart: self.timestart, timefinish: self.timefinish, level: self.level, cardset: self.cardset, user: self.user)
+    if collection.insert_one(timestart: self.timestart, timefinish: self.timefinish, level: self.level, board: self.board, target: self.target, user: self.user)
       return true
     else
       return false
@@ -18,7 +19,8 @@ class Game
   end
 
   def check_valid_equation
-    board = self.cardset
+    board = self.board
+    target = self.target.value
     values = []
 
     #put the values in the array
@@ -26,10 +28,10 @@ class Game
       values << card[:value]
     end
 
-    #get the target value alone
-    target = values.pop
-    #join the rest of the values array WITHOUT the `=`
-    equation_str = values[0..-2].join
+    # #get the target value alone
+    # target = values.pop
+    # #join the rest of the values array WITHOUT the `=`
+    # equation_str = values[0..-2].join
 
     #if the target is a number
     if target =~ /\d/

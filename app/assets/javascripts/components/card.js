@@ -3,7 +3,7 @@ var Card = React.createClass({
     return {value: this.props.value, clickable: this.props.can_click};
   },
   propTypes: {
-    // value: React.PropTypes.number,
+    value: React.PropTypes.string,
     can_click: React.PropTypes.bool,
     callbackParent: React.PropTypes.func
   },
