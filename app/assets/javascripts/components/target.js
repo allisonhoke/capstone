@@ -28,11 +28,13 @@ var Target = React.createClass({
     }
   },
   removeChild: function() {
+    if (this.state.item.value == this.state.current_card.value) {
         this.state.item = null;
         this.state.current_card = null;
       //set the state, which re-renders the hand with the correct cards in it
       this.setState(this.state);
       // console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
+    }
   },
   allowDrop: function(e) {
     e.preventDefault();
