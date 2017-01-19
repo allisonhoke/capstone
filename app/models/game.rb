@@ -2,8 +2,8 @@ include MongoHelper
 
 class Game
   include Mongoid::Document
-  field :timestart, type: Date
-  field :timefinish, type: Date
+  field :timestart, type: String
+  field :timefinish, type: String
   field :level, type: String
   field :user, type: String
   field :board, type: Array

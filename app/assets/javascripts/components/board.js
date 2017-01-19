@@ -23,12 +23,14 @@ var Board = React.createClass({
       this.state.message = data.message;
       this.setState(this.state);
     }
-    console.log(this.state.message);
+    // console.log(this.state.message);
   },
   loggedInOrNot: function() {
-    if (window.location.href == "http://localhost:3000/games") {
+    if (window.location.href == "http://myadacus.com/games" || window.location.href == "http://myadacus.com" || window.location.href == "http://localhost:3000/" || window.location.href == "http://localhost:3000/games") {
+      console.log(window.location.href);
       return "/games";
     } else {
+      console.log(window.location.href);
       var fullPath = window.location.href;
       var beg = fullPath.indexOf("users");
       var end = fullPath.indexOf("#_=_");
@@ -59,7 +61,7 @@ var Board = React.createClass({
       body: JSON.stringify({final_board: cardsOnBoard, target: boardTarget.value, endTime: new Date(), startTime: this.state.startTime}), //add starttiem endtime
       credentials: 'same-origin'
     }).then(function(response) {
-      console.log(response);
+      // console.log(response);
       return response.json();
     })
     .then(function(myJson) {

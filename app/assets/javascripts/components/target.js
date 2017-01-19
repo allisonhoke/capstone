@@ -54,7 +54,6 @@ var Target = React.createClass({
   render: function() {
     //if there is anything on the board, render it
     if (this.state.item !== null) {
-      console.log("GOT IN HERE");
         //create a ul to hold the cards
         return React.createElement(
           'ul',
