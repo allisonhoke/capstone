@@ -26,7 +26,7 @@ var Board = React.createClass({
     // console.log(this.state.message);
   },
   loggedInOrNot: function() {
-    if (window.location.href == "http://myadacus.com/games/" || window.location.href == "http://myadacus.com/" || window.location.href == "http://localhost:3000/" || window.location.href == "http://localhost:3000/games/") {
+    if (window.location.href == "http://myadacus.com/" || window.location.href == "http://localhost:3000/") {
       console.log(window.location.href);
       return "/games";
     } else {
