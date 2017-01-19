@@ -20,6 +20,6 @@ class SessionsController < ApplicationController
     if session[:user_id]
       session.delete(:user_id)
     end
-    redirect_to root_path
+    redirect_to games_path
   end
 end
