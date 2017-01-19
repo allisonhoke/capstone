@@ -30,6 +30,6 @@ var Card = React.createClass({
     e.dataTransfer.setData('card', JSON.stringify(this.state));
   },
   onDragEnd: function(e) {
-  //does anything need to happen here?
+  console.log("TARGET IS: " + e.target);
   }
 });

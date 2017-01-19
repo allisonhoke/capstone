@@ -13,16 +13,18 @@ var Hand = React.createClass({
     };
   },
   removeChild: function() {
-    for (var i = 0; i < this.state.card_array.length; i++) {
-        if (this.state.card_array[i].value == this.state.current_card.value) {
-          // console.log("removing index: " + i + " with value: " + this.state.card_array[i].value);
-          this.state.card_array.splice(i, 1);
+    if (this.state.current_card !== null) {
+      for (var i = 0; i < this.state.card_array.length; i++) {
+          if (this.state.card_array[i].value == this.state.current_card.value) {
+            // console.log("removing index: " + i + " with value: " + this.state.card_array[i].value);
+            this.state.card_array.splice(i, 1);
+          }
         }
-      }
-      this.current_card = null;
-      //set the state, which re-renders the hand with the correct cards in it
-      this.setState(this.state);
-      // console.log("FINAL HAND: " + JSON.stringify(this.state.card_array));
+        this.current_card = null;
+        //set the state, which re-renders the hand with the correct cards in it
+        this.setState(this.state);
+        // console.log("FINAL HAND: " + JSON.stringify(this.state.card_array));
+    }
   },
   onDragLeaveContainer: function(e) {
     var x = e.clientX;
