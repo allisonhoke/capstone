@@ -1,5 +1,5 @@
 module MongoHelper
   def get_client
-    return Mongoid::Client.default
+    return Mongoid::Clients.default
   end
 end
