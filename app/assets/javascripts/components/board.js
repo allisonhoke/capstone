@@ -51,12 +51,15 @@ var Board = React.createClass({
       return ;
     }
 
+    var token = $('meta[name="csrf-token"]').attr('content');
 
     fetch(a.loggedInOrNot(), {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({final_board: cardsOnBoard, target: boardTarget.value, endTime: new Date(), startTime: this.state.startTime}) //add starttiem endtime
+      headers: {"Content-Type": "application/json", 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-Token': token},
+      body: JSON.stringify({final_board: cardsOnBoard, target: boardTarget.value, endTime: new Date(), startTime: this.state.startTime}), //add starttiem endtime
+      credentials: 'same-origin'
     }).then(function(response) {
+      console.log(response);
       return response.json();
     })
     .then(function(myJson) {
