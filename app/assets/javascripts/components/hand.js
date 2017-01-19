@@ -61,7 +61,7 @@ var Hand = React.createClass({
     if (this.state.card_array.length > 0) {
       return React.createElement(
         'ul',
-        {className: "hand row small-up-6", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
+        {className: "hand row small-up-8", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
         this.state.card_array.map(function(cardNumber) {
           // console.log("key is: " + key);
           return React.createElement(

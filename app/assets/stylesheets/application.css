@@ -51,5 +51,6 @@ li {
 
 .equal {
   height: 10em;
-  display: inline;
+  border: solid black 2px;
+  background-color: lightpink;
 }

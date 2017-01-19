@@ -39,13 +39,15 @@ var Target = React.createClass({
   },
   drop: function(e) {
     e.preventDefault();
-    var data = JSON.parse(e.dataTransfer.getData('card'));
-    // console.log("TARGET before state: " + JSON.stringify(this.state));
-    // add the card to the item array
-    this.state.item = (data);
-    //set the state, which re-renders the board component with the correct cards
-    this.setState(this.state);
-    // console.log("TARGET after state: " + JSON.stringify(this.state));
+    if (this.state.item === null) {
+      var data = JSON.parse(e.dataTransfer.getData('card'));
+      // console.log("TARGET before state: " + JSON.stringify(this.state));
+      // add the card to the item array
+      this.state.item = (data);
+      //set the state, which re-renders the board component with the correct cards
+      this.setState(this.state);
+      // console.log("TARGET after state: " + JSON.stringify(this.state));
+    }
   },
   render: function() {
     //if there is anything on the board, render it
