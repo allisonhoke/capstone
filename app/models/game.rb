@@ -1,3 +1,5 @@
+include MongoHelper
+
 class Game
   include Mongoid::Document
   field :timestart, type: Date
@@ -8,7 +10,7 @@ class Game
   field :target, type: String
 
   def insert_document #passed in as hash
-    client = Mongoid::Clients.default
+    client = get_client
     collection = client[:games]
 
     if collection.insert_one(timestart: self.timestart, timefinish: self.timefinish, level: self.level, board: self.board, target: self.target, user: self.user)
@@ -46,7 +48,7 @@ class Game
 
   def self.find_games_by_user(id)
     better_id = id["$oid"]
-    client = Mongoid::Clients.default
+    client = get_client
     collection = client[:games]
 
     user_games = collection.find({user: better_id}) #array of games

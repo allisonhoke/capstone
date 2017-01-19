@@ -35,6 +35,8 @@ gem 'omniauth-facebook'
 #browserify
 gem "browserify-rails"
 
+gem 'dotenv-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -58,5 +60,5 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem "binding_of_caller"
-  gem 'dotenv-rails'
+
 end

@@ -1,3 +1,5 @@
+include MongoHelper
+
 class User
   include Mongoid::Document
   field :provider, type: String
@@ -12,7 +14,7 @@ class User
   validates_presence_of :provider, :uid
 
   def self.find_by(data)
-    client = Mongoid::Clients.default
+    client = get_client
     collection = client[:users]
 
     if current_user = collection.find({uid: data[:uid]}).first
@@ -24,14 +26,14 @@ class User
 
   def self.find_user(id)
     better_id = id["$oid"]
-    client = Mongoid::Clients.default
+    client = get_client
     collection = client[:users]
 
     return collection.find(:_id => BSON::ObjectId(better_id)).first
   end
 
   def self.build_from_facebook(auth_hash)
-    client = Mongoid::Clients.default
+    client = get_client
     collection = client[:users]
 
     user = User.new
