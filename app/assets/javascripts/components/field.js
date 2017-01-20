@@ -28,6 +28,7 @@ var Field = React.createClass({
     }
   },
   removeChild: function() {
+    // console.log("Current card: " + this.state.current_card.value);
     for (var i = 0; i < this.state.item_array.length; i++) {
         if (this.state.item_array[i].value == this.state.current_card.value) {
           this.state.item_array.splice(i, 1);
@@ -51,6 +52,9 @@ var Field = React.createClass({
     this.setState(this.state);
     // console.log("after state: " + JSON.stringify(this.state));
   },
+  // hover: function() {
+  //   console.log("Hovering over the card");
+  // },
   render: function() {
     //if there is anything on the board, render it
     if (this.state.item_array.length > 0) {
@@ -62,7 +66,7 @@ var Field = React.createClass({
             //create a card for each item in the item_array
             return React.createElement(
               Card,
-              {key: card.value.toString(), value: card.value, callbackParent: this.setCurrentCard}
+              {key: card.value.toString(), value: card.value, callbackParent: this.setCurrentCard} //, onHover: this.hover
             );
           }, this) //bind the board as this
         );
