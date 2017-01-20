@@ -5,17 +5,21 @@ var Card = React.createClass({
   propTypes: {
     value: React.PropTypes.string,
     can_click: React.PropTypes.bool,
-    callbackParent: React.PropTypes.func
+    callbackParent: React.PropTypes.func,
+    // callbackTwo: React.PropTypes.func
   },
   // getDefaultProps: function() {
   //   return {
   //     name: 'Mary'
   //   };
   // },
+  hover: function(e) {
+    this.props.callbackTwo(this.state.value);
+  },
   render: function() {
     return React.createElement(
       'li',
-      {className: "number-card column", draggable: true, onDragStart: this.onDragStart, onDragEnd: this.onDragEnd, onMouseDown: this.setCurrentCardForParent},
+      {className: "number-card column", draggable: true, onDragStart: this.onDragStart, onDragEnd: this.onDragEnd, onMouseDown: this.setCurrentCardForParent, onDragOver: this.hover},
       this.state.value
     );
   },

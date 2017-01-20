@@ -57,6 +57,9 @@ var Hand = React.createClass({
     this.setState(this.state);
     // console.log("after state: " + JSON.stringify(this.state));
   },
+  hoverCard: function(value) {
+    console.log("VALUE PASSED TO PARENT IS: " + value);
+  },
   render: function() {
     // console.log(JSON.stringify(this.state));
     // if there is anything in the hand, render the cards
@@ -68,7 +71,7 @@ var Hand = React.createClass({
           // console.log("key is: " + key);
           return React.createElement(
             Card,
-            {key: cardNumber.value.toString(), value: cardNumber.value, callbackParent: this.setCurrentCard}// // props
+            {key: cardNumber.value.toString(), value: cardNumber.value, callbackParent: this.setCurrentCard, callbackTwo: this.hoverCard}// // props
           );
         }, this)
       );
