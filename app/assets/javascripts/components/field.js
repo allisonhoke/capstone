@@ -57,12 +57,15 @@ var Field = React.createClass({
   // },
   hoverCard: function(value) {
     console.log("VALUE PASSED TO PARENT IS: " + value);
+    // var index ;
     // for (var i = 0; i < this.state.item_array.length; i++) {
     //   if (this.state.item_array[i].value == value) {
-    //     this.state.item_array.splice(i, 0, {value: " "});
-    //     this.setState(this.state);
+    //     index = i;
     //   }
     // }
+    //
+    // this.state.item_array.splice(index, 0, {value: "dz"});
+    // this.setState(this.state);
   },
   render: function() {
     //if there is anything on the board, render it
