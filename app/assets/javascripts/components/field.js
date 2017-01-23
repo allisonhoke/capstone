@@ -38,6 +38,10 @@ var Field = React.createClass({
   },
   endDrag: function(e) {
     // console.log("ENDING DRAG");
+    if (e.target.parentNode.lastChild.className == "placeholder column") {
+      this.state.nodePlacement = "after";
+    }
+
     this.dragged.style.display = "block";
     this.dragged.parentNode.removeChild(placeholder);
 
@@ -77,8 +81,6 @@ var Field = React.createClass({
 
     if (e.target.className == "playing-board row small-up-8 column") {
       e.target.appendChild(placeholder);
-      this.state.nodePlacement = "after";
-      this.setState(this.state);
     }
   },
   render: function() {
