@@ -16,7 +16,7 @@ var Target = React.createClass({
         //create a ul to hold the cards
         return React.createElement(
           'ul',
-          {className: "playing-board row small-up-6 column"},
+          {className: "playing-board"},
             //create a card for each item in the item_array
             React.createElement(
               Card,

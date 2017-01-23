@@ -95,15 +95,15 @@ var Board = React.createClass({
           React.createElement(
             Field,
             {ref: "field", toDisplay: "Place cards here", item_array: this.state.items}
-          )
+          ),
           // React.createElement(
           //   Equal,
           //   null
           // ),
-          // React.createElement(
-          //   Target,
-          //   {ref: "target", toDisplay: "Place the target here"}
-          // )
+          React.createElement(
+            Target,
+            {ref: "target", toDisplay: "Place the target here"}
+          )
         ),
         //render a submit button if there is at least one element on the board
         React.createElement(
