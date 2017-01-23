@@ -49,8 +49,9 @@ var Field = React.createClass({
     // console.log("TO" + to);
 
     if(from < to) to--;
+    if(this.state.nodePlacement == "after") to++;
     data.splice(to, 0, data.splice(from, 1)[0]);
-    this.setState({item_array: data});
+    this.setState({item_array: data, nodePlacement: null});
   },
   dragOver: function(e) {
     e.preventDefault();
@@ -72,6 +73,12 @@ var Field = React.createClass({
     // console.log("OVER: " + this.state.over);
     if (e.target.parentNode.className == "playing-board row small-up-8 column") {
       e.target.parentNode.insertBefore(placeholder, e.target);
+    }
+
+    if (e.target.className == "playing-board row small-up-8 column") {
+      e.target.appendChild(placeholder);
+      this.state.nodePlacement = "after";
+      this.setState(this.state);
     }
   },
   render: function() {
