@@ -1,3 +1,12 @@
+// var placeholder = React.createElement(
+//   'li',
+//   {className: "placeholder"},
+//   "D.Z."
+// );
+
+var placeholder = document.createElement("li");
+placeholder.className = "placeholder column";
+
 var Field = React.createClass({
   getInitialState: function() {
     return {display: this.props.toDisplay, item_array: this.props.item_array};
@@ -8,64 +17,62 @@ var Field = React.createClass({
   },
   getDefaultProps: function() {
     return {
-      current_card: null
+
     };
   },
-  setCurrentCard: function(card) {
-    // console.log("BOARDcard passed to parent is: " + JSON.stringify(card));
-    this.state.current_card = card;
+  startDrag: function(e) {
+    // console.log("STARTING DRAG ");
+    this.dragged = e.currentTarget;
+    e.dataTransfer.effectAllowed = 'move';
+
+    e.dataTransfer.setData("text/html", e.currentTarget);
+
+    var indexDragging;
+    for (var i = 0; i < this.state.item_array.length; i++) {
+      if (this.state.item_array[i].value == e.currentTarget.innerHTML) {
+        indexDragging = i;
+      }
+    }
+    this.state.from = indexDragging;
     this.setState(this.state);
   },
-  onDragLeaveContainer: function(e) {
-    var x = e.clientX;
-    var y = e.clientY;
-    var top    = e.currentTarget.offsetTop;
-    var bottom = top + e.currentTarget.offsetHeight;
-    var left   = e.currentTarget.offsetLeft;
-    var right  = left + e.currentTarget.offsetWidth;
-    if (y <= top || y >= bottom || x <= left || x >= right) {
-      this.removeChild();
-    }
+  endDrag: function(e) {
+    // console.log("ENDING DRAG");
+    this.dragged.style.display = "block";
+    this.dragged.parentNode.removeChild(placeholder);
+
+    var data = this.state.item_array;
+
+    var from = this.state.from;
+    // console.log("FROM" + from);
+    var to = this.state.over;
+    // console.log("TO" + to);
+
+    if(from < to) to--;
+    data.splice(to, 0, data.splice(from, 1)[0]);
+    this.setState({item_array: data});
   },
-  removeChild: function() {
-    // console.log("Current card: " + this.state.current_card.value);
-    for (var i = 0; i < this.state.item_array.length; i++) {
-        if (this.state.item_array[i].value == this.state.current_card.value) {
-          this.state.item_array.splice(i, 1);
+  dragOver: function(e) {
+    e.preventDefault();
+
+    this.state.target = e.target;
+    this.setState(this.state);
+
+    this.dragged.style.display = "none";
+    if(e.target.className == "placeholder") return;
+
+    if(e.target.className != "placeholder column" && e.target.className != "playing-board row small-up-8 column") {
+      for (var i = 0; i < this.state.item_array.length; i++) {
+        if (this.state.item_array[i].value == e.target.innerHTML) {
+          this.state.over = i;
+          this.setState(this.state);
         }
       }
-      this.current_card = null;
-      //set the state, which re-renders the hand with the correct cards in it
-      this.setState(this.state);
-      // console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
-  },
-  allowDrop: function(e) {
-    e.preventDefault();
-  },
-  drop: function(e) {
-    e.preventDefault();
-    var data = JSON.parse(e.dataTransfer.getData('card'));
-    // console.log("before state: " + JSON.stringify(this.state));
-    // add the card to the item array
-    this.state.item_array.push(data);
-    //set the state, which re-renders the board component with the correct cards
-    this.setState(this.state);
-    // console.log("after state: " + JSON.stringify(this.state));
-  },
-  // hover: function() {
-  //   console.log("Hovering over the card");
-  // },
-  hoverCard: function(value) {
-    console.log("VALUE PASSED TO PARENT IS: " + value);
-    // var index ;
-    // for (var i = 0; i < this.state.item_array.length; i++) {
-    //   if (this.state.item_array[i].value == value) {
-    //     index = i;
-    //   }
-    // }
-    //
-    // this.state.item_array.splice(index, 0, {value: "dz"});
-    // this.setState(this.state);
+    }
+    // console.log("OVER: " + this.state.over);
+    if (e.target.parentNode.className == "playing-board row small-up-8 column") {
+      e.target.parentNode.insertBefore(placeholder, e.target);
+    }
   },
   render: function() {
     //if there is anything on the board, render it
@@ -73,12 +80,12 @@ var Field = React.createClass({
         //create a ul to hold the cards
         return React.createElement(
           'ul',
-          {className: "playing-board row small-up-8 column", onDragLeave: this.onDragLeaveContainer, onDragOver: this.allowDrop, onDrop: this.drop},
-          this.state.item_array.map(function(card) {
+          {className: "playing-board row small-up-8 column", onDragOver: this.dragOver},
+          this.state.item_array.map(function(card, index) {
             //create a card for each item in the item_array
             return React.createElement(
               Card,
-              {key: card.value.toString(), value: card.value, callbackParent: this.setCurrentCard, callbackTwo: this.hoverCard} //, onHover: this.hover
+              {dataset: {cardIndex: index}, key: card.value.toString(), value: card.value, callDragStart: this.startDrag, callDragEnd: this.endDrag} //, onHover: this.hover
             );
           }, this) //bind the board as this
         );
@@ -87,7 +94,7 @@ var Field = React.createClass({
     //if there is nothing on the board, render the display attribute
     return React.createElement(
         'ul',
-        {className: "playing-board column", onDragLeave: this.onDragLeave, onDragOver: this.allowDrop, onDrop: this.drop},
+        {className: "playing-board column"},
         this.state.display
     );
   }

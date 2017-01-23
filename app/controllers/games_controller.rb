@@ -2,11 +2,11 @@ class GamesController < ApplicationController
   def index
     @dbset = Cardset.all.sample[:set]
 
-    @hand_info = {cardSet: @dbset}
+    # @hand_info = {cardSet: @dbset}
     @operator_hand_info = {cardSet: ["+", "-", "*", "/", "(", ")"]}
     # TODO: add () to operator hand
 
-    @playing_board = {items: []}
+    @playing_board = {cardSet: @dbset}
 
     if session[:user_id]
       @user = User.find_user(session[:user_id])

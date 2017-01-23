@@ -1,39 +1,56 @@
+var cardSource = {
+  beginDrag: function (props) {
+    // Return the data describing the dragged item
+    var item = { value: props.value };
+    return item;
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
+
+
 var Card = React.createClass({
   getInitialState: function() {
-    return {value: this.props.value, clickable: this.props.can_click};
+    return {value: this.props.value};
   },
   propTypes: {
     value: React.PropTypes.string,
-    can_click: React.PropTypes.bool,
-    callbackParent: React.PropTypes.func,
-    // callbackTwo: React.PropTypes.func
+    // connectDragSource: PropTypes.func.isRequired,
+    // isDragging: PropTypes.bool.isRequired
   },
   // getDefaultProps: function() {
   //   return {
   //     name: 'Mary'
   //   };
   // },
-  hover: function(e) {
-    this.props.callbackTwo(this.state.value);
+  dragStart: function(e) {
+    // console.log("STARTING DRAG");
+    this.props.callDragStart(e);
+  },
+  dragEnd: function(e) {
+    // console.log("ENDING DRAG");
+    this.props.callDragEnd(e);
   },
   render: function() {
+    // var connectDragSource = this.props.connectDragSource;
+    // var isDragging = this.props.isDragging;
+    //
+    // return connectDragSource(
+    //   React.createElement(
+    //     'li',
+    //     {style: {opacity: isDragging ? 0.5 : 1, cursor: 'move', fontSize: 25, fontWeight: 'bold'},
+    //     "abc"
+    //   );
+    // )
     return React.createElement(
       'li',
-      {className: "number-card column", draggable: true, onDragStart: this.onDragStart, onDragEnd: this.onDragEnd, onMouseDown: this.setCurrentCardForParent, onDragOver: this.hover},
+      {className: "number-card column", draggable: "true", onDragStart: this.dragStart, onDragEnd: this.dragEnd},
       this.state.value
     );
-  },
-  setCurrentCardForParent: function() {
-    // console.log("Setting current card for parent");
-    // console.log(JSON.stringify(this.state));
-    this.props.callbackParent(this.state);
-  },
-  onDragStart: function(e) {
-    // console.log(this.props);
-    e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setData('card', JSON.stringify(this.state));
-  },
-  onDragEnd: function(e) {
-  // console.log("TARGET IS: " + e.target);
   }
 });

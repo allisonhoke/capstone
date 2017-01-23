@@ -54,3 +54,9 @@ li {
   border: solid black 2px;
   background-color: lightpink;
 }
+
+li.placeholder {background: rgb(255,240,120);}
+li.placeholder:before {
+  content: "Drop here";
+  color: rgb(225,210,90);
+}

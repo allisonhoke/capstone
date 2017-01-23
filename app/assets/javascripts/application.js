@@ -16,4 +16,6 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require ReactDnDHTML5Backend.min.js
+//= require ReactDnD
 //= require_tree .
