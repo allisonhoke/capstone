@@ -110,7 +110,7 @@ var Field = React.createClass({
       this.dragged.style.display = "block";
       if (e.target.parentNode.className == "playing-board row small-up-8 column") {
         e.target.parentNode.removeChild(placeholder);
-      } else if (e.target.parentNode == "playing-area"){
+      } else if (e.target.parentNode.className == "playing-area"){
         e.target.removeChild(placeholder);
       }
 
