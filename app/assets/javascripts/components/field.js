@@ -107,7 +107,9 @@ var Field = React.createClass({
         this.state.nodePlacement = "after";
       }
       // console.log(e.target.parentNode.className);
-      this.dragged.style.display = "block";
+      if (this.dragged) {
+        this.dragged.style.display = "block";
+      }
       if (e.target.parentNode.className == "playing-board row small-up-8 column") {
         e.target.parentNode.removeChild(placeholder);
       } else if (e.target.parentNode.className == "playing-area"){
@@ -123,8 +125,8 @@ var Field = React.createClass({
       if(from < to) to--;
       if(this.state.nodePlacement == "after") to++;
 
-console.log(this.alreadyOnField(this.dragged.innerHTML));
-      if (this.alreadyOnField(this.dragged.innerHTML)) {
+// console.log(this.alreadyOnField(this.dragged.innerHTML));
+      if (this.dragged && this.alreadyOnField(this.dragged.innerHTML)) {
           data.splice(to, 0, data.splice(from, 1)[0]);
           this.setState({item_array: data});
       } else {
@@ -160,7 +162,9 @@ console.log(JSON.stringify(this.state.item_array));
     this.state.target = e.target;
     this.setState(this.state);
 
-    this.dragged.style.display = "none";
+    if (this.dragged) {
+      this.dragged.style.display = "none";
+    }
     if(e.target.className == "placeholder") return;
 
     if(e.target.className != "placeholder column" && e.target.className != "playing-board row small-up-8 column") {
