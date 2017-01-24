@@ -15,6 +15,17 @@ var Hand = React.createClass({
   allowDrop: function(e) {
      e.preventDefault();
    },
+   drop: function(e) {
+   e.preventDefault();
+   //get the data that was transferred with the drag
+   var data = JSON.parse(e.dataTransfer.getData('card'));
+   // console.log("Data is: " + JSON.stringify(data));
+   // console.log("before state: " + JSON.stringify(this.state));
+   //add that data to the card array so the card is back in the hand
+   this.state.card_array.push(data);
+   this.setState(this.state);
+   console.log("after state: " + JSON.stringify(this.state));
+ },
   setCurrentCard: function(card) {
     // console.log("card passed to parent is: " + JSON.stringify(card));
     this.state.current_card = card;
@@ -61,7 +72,7 @@ var Hand = React.createClass({
     if (this.state.card_array.length > 0) {
       return React.createElement(
         'ul',
-        {className: "hand row small-up-8", onDragOver: this.dragOver, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
+        {className: "hand row small-up-8", onDragOver: this.allowDrop, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
         this.state.card_array.map(function(cardNumber) {
           // console.log("key is: " + key);
           return React.createElement(
