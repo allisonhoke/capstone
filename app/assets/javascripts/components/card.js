@@ -16,10 +16,10 @@ var Card = React.createClass({
     // console.log("STARTING DRAG");
     this.props.callDragStart(e);
   },
-  dragEnd: function(e) {
-    // console.log("ENDING DRAG");
-    this.props.callDragEnd(e);
-  },
+  // dragEnd: function(e) {
+  //   // console.log("ENDING DRAG");
+  //   this.props.callDragEnd(e);
+  // },
   setCurrentCardForParent: function() {
     // console.log("Setting current card for parent");
     // console.log(JSON.stringify(this.state));
@@ -38,7 +38,7 @@ var Card = React.createClass({
     // )
     return React.createElement(
       'li',
-      {className: "number-card column", draggable: "true", onDragStart: this.dragStart, onDragEnd: this.dragEnd, onMouseDown: this.setCurrentCardForParent},
+      {className: "number-card column", draggable: "true", onDragStart: this.dragStart, onMouseDown: this.setCurrentCardForParent}, //, onDragEnd: this.dragEnd
       this.state.value
     );
   }

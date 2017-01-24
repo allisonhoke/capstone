@@ -62,27 +62,7 @@ var Target = React.createClass({
       // console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
     }
   },
-  // endDrag: function(e) {
-  //   // console.log("ENDING DRAG");
-  //   if (e.target.parentNode.lastChild.className == "placeholder column") {
-  //     this.state.nodePlacement = "after";
-  //   }
-  //
-  //   this.dragged.style.display = "block";
-  //   this.dragged.parentNode.removeChild(placeholder);
-  //
-  //   var data = this.state.item_array;
-  //
-  //   var from = this.state.from;
-  //   // console.log("FROM" + from);
-  //   var to = this.state.over;
-  //   // console.log("TO" + to);
-  //
-  //   if(from < to) to--;
-  //   if(this.state.nodePlacement == "after") to++;
-  //   data.splice(to, 0, data.splice(from, 1)[0]);
-  //   this.setState({item_array: data, nodePlacement: null});
-  // },
+  
   render: function() {
     // console.log(this.state);
     //if there is anything on the board, render it
