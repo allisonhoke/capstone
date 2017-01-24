@@ -1,19 +1,3 @@
-var cardSource = {
-  beginDrag: function (props) {
-    // Return the data describing the dragged item
-    var item = { value: props.value };
-    return item;
-  }
-};
-
-function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  };
-}
-
-
 var Card = React.createClass({
   getInitialState: function() {
     return {value: this.props.value};

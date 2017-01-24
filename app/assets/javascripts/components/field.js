@@ -26,6 +26,8 @@ var Field = React.createClass({
     e.dataTransfer.effectAllowed = 'move';
 
     e.dataTransfer.setData("text/html", e.currentTarget);
+    e.dataTransfer.setData('card', JSON.stringify({value: e.currentTarget.innerHTML}));
+    // console.log(e.dataTransfer.getData('card'));
 
     var indexDragging;
     for (var i = 0; i < this.state.item_array.length; i++) {
@@ -83,13 +85,26 @@ var Field = React.createClass({
       e.target.appendChild(placeholder);
     }
   },
+  onDragLeaveContainer: function(e) {
+   var x = e.clientX;
+   var y = e.clientY;
+   var top    = e.currentTarget.offsetTop;
+   var bottom = top + e.currentTarget.offsetHeight;
+   var left   = e.currentTarget.offsetLeft;
+   var right  = left + e.currentTarget.offsetWidth;
+   if (y <= top || y >= bottom || x <= left || x >= right) {
+    //  this.removeChild();
+    this.props.callbackMoving(this.dragged.innerHTML);
+    console.log("LEFT THE CONTAINER");
+   }
+ },
   render: function() {
     //if there is anything on the board, render it
     if (this.state.item_array.length > 0) {
         //create a ul to hold the cards
         return React.createElement(
           'ul',
-          {className: "playing-board row small-up-8 column", onDragOver: this.dragOver},
+          {className: "playing-board row small-up-8 column", onDragOver: this.dragOver, onDragLeave: this.onDragLeaveContainer},
           this.state.item_array.map(function(card, index) {
             //create a card for each item in the item_array
             return React.createElement(
