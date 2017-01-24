@@ -9,7 +9,7 @@ placeholder.className = "placeholder column";
 
 var Field = React.createClass({
   getInitialState: function() {
-    return {display: this.props.toDisplay, item_array: this.props.item_array};
+    return {display: this.props.toDisplay, item_array: this.props.item_array, nodePlacement: this.props.nodePlacement};
   },
   propTypes: {
     toDisplay: React.PropTypes.string,
@@ -17,7 +17,7 @@ var Field = React.createClass({
   },
   getDefaultProps: function() {
     return {
-
+      nodePlacement: null
     };
   },
   setCurrentCard: function(card) {
@@ -102,13 +102,12 @@ var Field = React.createClass({
 
     drop: function(e) {
       e.preventDefault();
-      console.log("DROPPING");
+      // console.log("DROPPING");
       if (e.target.parentNode.lastChild.className == "placeholder column") {
         this.state.nodePlacement = "after";
       }
-
-      console.log(e.target.parentNode.className);
-      // this.dragged.style.display = "block";
+      // console.log(e.target.parentNode.className);
+      this.dragged.style.display = "block";
       if (e.target.parentNode.className == "playing-board row small-up-8 column") {
         e.target.parentNode.removeChild(placeholder);
       } else if (e.target.parentNode == "playing-area"){
@@ -124,15 +123,22 @@ var Field = React.createClass({
       if(from < to) to--;
       if(this.state.nodePlacement == "after") to++;
 
+console.log(this.alreadyOnField(this.dragged.innerHTML));
       if (this.alreadyOnField(this.dragged.innerHTML)) {
           data.splice(to, 0, data.splice(from, 1)[0]);
-          this.setState({item_array: data, nodePlacement: null});
+          this.setState({item_array: data});
       } else {
-        data.splice(to, 0, JSON.parse(e.dataTransfer.getData('card')));
-        this.setState({item_array: data, nodePlacement: null});
+        if (this.state.nodePlacement == "after") {
+          data.splice((to + 1), 0, JSON.parse(e.dataTransfer.getData('card')));
+          this.setState({item_array: data});
+        } else {
+          data.splice(to , 0, JSON.parse(e.dataTransfer.getData('card')));
+          this.setState({item_array: data});
+        }
       }
-      this.setState(this.state);
+      this.setState({nodePlacement: null});
 
+      console.log(this.state.nodePlacement);
 console.log(JSON.stringify(this.state.item_array));
 
 
@@ -145,6 +151,7 @@ console.log(JSON.stringify(this.state.item_array));
       // this.setState(this.state);
       // // console.log("after state: " + JSON.stringify(this.state));
     },
+
 
 
   dragOver: function(e) {
@@ -176,9 +183,8 @@ console.log(JSON.stringify(this.state.item_array));
 
 
 
-
-
   render: function() {
+    console.log("RENDER " + JSON.stringify(this.state.item_array));
     //if there is anything on the board, render it
     if (this.state.item_array.length > 0) {
         //create a ul to hold the cards
