@@ -20,6 +20,36 @@ var Field = React.createClass({
 
     };
   },
+  setCurrentCard: function(card) {
+    // console.log("BOARDcard passed to parent is: " + JSON.stringify(card));
+    this.state.current_card = card;
+    this.setState(this.state);
+  },
+  onDragLeaveContainer: function(e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    var top    = e.currentTarget.offsetTop;
+    var bottom = top + e.currentTarget.offsetHeight;
+    var left   = e.currentTarget.offsetLeft;
+    var right  = left + e.currentTarget.offsetWidth;
+    if (y <= top || y >= bottom || x <= left || x >= right) {
+      this.removeChild();
+      console.log("got in here leaving container");
+    }
+  },
+  removeChild: function() {
+    this.dragged.parentNode.removeChild(placeholder);
+    console.log("Current card: " + this.state.current_card.value);
+    for (var i = 0; i < this.state.item_array.length; i++) {
+        if (this.state.item_array[i].value == this.state.current_card.value) {
+          this.state.item_array.splice(i, 1);
+        }
+      }
+      this.current_card = null;
+      //set the state, which re-renders the hand with the correct cards in it
+      this.setState(this.state);
+      console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
+  },
   startDrag: function(e) {
     // console.log("STARTING DRAG ");
     this.dragged = e.currentTarget;
@@ -85,19 +115,6 @@ var Field = React.createClass({
       e.target.appendChild(placeholder);
     }
   },
-  onDragLeaveContainer: function(e) {
-   var x = e.clientX;
-   var y = e.clientY;
-   var top    = e.currentTarget.offsetTop;
-   var bottom = top + e.currentTarget.offsetHeight;
-   var left   = e.currentTarget.offsetLeft;
-   var right  = left + e.currentTarget.offsetWidth;
-   if (y <= top || y >= bottom || x <= left || x >= right) {
-    //  this.removeChild();
-    this.props.callbackMoving(this.dragged.innerHTML);
-    console.log("LEFT THE CONTAINER");
-   }
- },
   render: function() {
     //if there is anything on the board, render it
     if (this.state.item_array.length > 0) {
@@ -109,7 +126,7 @@ var Field = React.createClass({
             //create a card for each item in the item_array
             return React.createElement(
               Card,
-              {dataset: {cardIndex: index}, key: card.value.toString(), value: card.value, callDragStart: this.startDrag, callDragEnd: this.endDrag} //, onHover: this.hover
+              {key: card.value.toString(), value: card.value, callDragStart: this.startDrag, callDragEnd: this.endDrag, callbackParent: this.setCurrentCard}
             );
           }, this) //bind the board as this
         );

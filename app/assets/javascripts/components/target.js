@@ -21,9 +21,9 @@ var Target = React.createClass({
   },
   drop: function(e) {
     e.preventDefault();
-    console.log("TRANSFERRING:" + JSON.parse(e.dataTransfer.getData('card')));
+    // console.log("TRANSFERRING:" + JSON.parse(e.dataTransfer.getData('card')));
     if (this.state.item === null) {
-      var data = JSON.parse(e.dataTransfer.getData('card'))
+      var data = JSON.parse(e.dataTransfer.getData('card'));
       // var data = JSON.parse(e.dataTransfer.getData('card'));
       // console.log("TARGET before state: " + JSON.stringify(this.state));
       // add the card to the item array
@@ -34,7 +34,7 @@ var Target = React.createClass({
     }
   },
   render: function() {
-    console.log(this.state);
+    // console.log(this.state);
     //if there is anything on the board, render it
     if (this.state.item !== null) {
         //create a ul to hold the cards

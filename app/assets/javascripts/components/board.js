@@ -1,6 +1,6 @@
 var Board = React.createClass({
   getInitialState: function() {
-    return {message: this.props.message, moving: this.props.moving, startTime: this.props.startTime, endTime: this.props.endTime,  items: this.props.data.cardSet.map(function(number) {
+    return {message: this.props.message, startTime: this.props.startTime, endTime: this.props.endTime,  items: this.props.data.cardSet.map(function(number) {
       return {value: number};
     })};
   },
@@ -13,8 +13,7 @@ var Board = React.createClass({
   getDefaultProps: function() {
     return {
       message: "WELCOME!",
-      startTime: new Date(),
-      moving: null
+      startTime: new Date()
     };
   },
   // handleData: function(data) {
@@ -75,11 +74,6 @@ var Board = React.createClass({
   // newGame: function() {
   //   window.location.reload();
   // },
-  setMoving: function(value) {
-    console.log("VALUE IS: " + value);
-    this.state.moving = value;
-    this.setState(this.state);
-  },
   render: function() {
       return React.createElement(
         'article',
@@ -100,7 +94,7 @@ var Board = React.createClass({
         //create a ul to hold the cards
           React.createElement(
             Field,
-            {ref: "field", toDisplay: "Place cards here", item_array: this.state.items, callbackMoving: this.setMoving}
+            {ref: "field", toDisplay: "Place cards here", item_array: this.state.items}
           ),
           // React.createElement(
           //   Equal,
