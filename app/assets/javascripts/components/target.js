@@ -33,6 +33,56 @@ var Target = React.createClass({
       // console.log("TARGET after state: " + JSON.stringify(this.state));
     }
   },
+  startDrag: function(e) {
+    // console.log("STARTING DRAG ");
+    this.dragged = e.currentTarget;
+    e.dataTransfer.effectAllowed = 'move';
+
+    e.dataTransfer.setData("text/html", e.currentTarget);
+    e.dataTransfer.setData('card', JSON.stringify({value: e.currentTarget.innerHTML}));
+    // console.log(e.dataTransfer.getData('card'));
+  },
+  onDragLeaveContainer: function(e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    var top    = e.currentTarget.offsetTop;
+    var bottom = top + e.currentTarget.offsetHeight;
+    var left   = e.currentTarget.offsetLeft;
+    var right  = left + e.currentTarget.offsetWidth;
+    if (y <= top || y >= bottom || x <= left || x >= right) {
+      this.removeChild();
+    }
+  },
+  removeChild: function() {
+    if (this.state.item.value == this.state.current_card.value) {
+        this.state.item = null;
+        this.state.current_card = null;
+      //set the state, which re-renders the hand with the correct cards in it
+      this.setState(this.state);
+      // console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
+    }
+  },
+  // endDrag: function(e) {
+  //   // console.log("ENDING DRAG");
+  //   if (e.target.parentNode.lastChild.className == "placeholder column") {
+  //     this.state.nodePlacement = "after";
+  //   }
+  //
+  //   this.dragged.style.display = "block";
+  //   this.dragged.parentNode.removeChild(placeholder);
+  //
+  //   var data = this.state.item_array;
+  //
+  //   var from = this.state.from;
+  //   // console.log("FROM" + from);
+  //   var to = this.state.over;
+  //   // console.log("TO" + to);
+  //
+  //   if(from < to) to--;
+  //   if(this.state.nodePlacement == "after") to++;
+  //   data.splice(to, 0, data.splice(from, 1)[0]);
+  //   this.setState({item_array: data, nodePlacement: null});
+  // },
   render: function() {
     // console.log(this.state);
     //if there is anything on the board, render it
@@ -40,11 +90,11 @@ var Target = React.createClass({
         //create a ul to hold the cards
         return React.createElement(
           'ul',
-          {className: "playing-board", onDragOver: this.allowDrop, onDrop: this.drop},
+          {className: "playing-board", onDragOver: this.allowDrop, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
             //create a card for each item in the item_array
             React.createElement(
               Card,
-              {key: this.state.item.value.toString(), value: this.state.item.value}
+              {key: this.state.item.value.toString(), value: this.state.item.value, callDragStart: this.startDrag, callbackParent: this.setCurrentCard}
             )
       );
     }
