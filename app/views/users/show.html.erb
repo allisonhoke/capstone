@@ -1,8 +1,32 @@
-DASHBOARD FOR user: <%= @user["name"]%>
-<%= link_to "PLAY", user_games_path(@user[:_id]) %>
-<%#= "Provider: " + @user.provider%>
-<%#= "Number of completed puzzles: " + @user.num_puzzles%>
+<header class="header container">
+  <div class="user-info row">
+    <p class="col-xs-6"><%= @user["name"]%></p>
+    <link rel="stylesheet" href="/css/master.css">
+    <%= link_to 'Play', user_games_path(@user[:_id]), class: "user-nav col-xs-2" %>
+    <%= link_to 'Log Out', logout_path, method: :delete, class: "user-nav col-xs-2" %>
+  </div>
+</header>
 
-<% @games.each do |game| %>
-<p><%= game %></p>
-<% end %>
+<div class="row">
+  <p class="col-xs-6">Number of puzzles solved: <%= @number_of_games%></p>
+
+</div>
+
+
+<div class="user-stats container">
+  <article class="games row">
+    <section class="col-xs-6">
+      <% @all_games.each do |game| %>
+      <p class="game-info"><%= game["timestart"] %>, <%= game["timefinish"] %></p>
+      <% end %>
+    </section>
+
+    <section class="col-xs-6">
+      <% @all_games.each do |game| %>
+      <p class="game-info"><%= game["timestart"] %>, <%= game["timefinish"] %></p>
+      <% end %>
+    </section>
+  </article>
+</div>
+
+<%#= "Number of completed puzzles: " + @user.num_puzzles%>

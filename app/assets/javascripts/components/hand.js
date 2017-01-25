@@ -70,7 +70,7 @@ var Hand = React.createClass({
     if (this.state.card_array.length > 0) {
       return React.createElement(
         'ul',
-        {className: "hand col-xs-4", onDragOver: this.allowDrop, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
+        {className: "hand col-xs-8", onDragOver: this.allowDrop, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
         this.state.card_array.map(function(cardNumber) {
           // console.log("key is: " + key);
           return React.createElement(
@@ -83,7 +83,7 @@ var Hand = React.createClass({
     //if there is nothing in the hand, render some text
     return React.createElement(
       'ul',
-      {className: "hand col-xs-4", onDragOver: this.allowDrop, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
+      {className: "hand col-xs-8", onDragOver: this.allowDrop, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
       "Unused cards"
     );
   }

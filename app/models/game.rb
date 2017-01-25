@@ -20,6 +20,21 @@ class Game
     end
   end
 
+  def self.calculate_time(start, finish)
+    start_time = DateTime.iso8601(start)
+    end_time = DateTime.iso8601(finish)
+
+    total_time = end_time.to_time - start_time.to_time
+    num_of_mins = total_time.to_s[0..-3].to_i / 60
+    mins_in_secs = num_of_mins * 60
+
+    if total_time > 60
+      return num_of_mins.to_s + " minute(s), " + (total_time - mins_in_secs).to_s[0..4] + " seconds"
+    else
+      return total_time.to_s + " seconds"
+    end
+  end
+
   def check_valid_equation
     board = self.board
     target = self.target
@@ -29,11 +44,6 @@ class Game
     board.each do |card| #each card is a object/hash {value: "value"}
       values << card[:value]
     end
-
-    # #get the target value alone
-    # target = values.pop
-    # #join the rest of the values array WITHOUT the `=`
-    # equation_str = values[0..-2].join
 
     #if the target is a number
     if target =~ /\d/
@@ -53,5 +63,11 @@ class Game
 
     user_games = collection.find({user: better_id}) #array of games
     return user_games
+  end
+
+  def find_user_top_games(id)
+    all_games = Game.find_games_by_user(id)
+
+
   end
 end

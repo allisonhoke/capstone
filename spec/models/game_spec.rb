@@ -31,4 +31,18 @@ RSpec.describe Game, type: :model do
 
     expect(test_board.check_valid_equation).to eq(false)
   end
+
+  it "self.calculate_time returns the correct time that the game took to play" do
+    start = "2017-01-19T21:34:32.748Z"
+    finish = "2017-01-19T21:34:42.278Z"
+
+    expect(Game.calculate_time(start, finish)). to eq("9.53 seconds")
+  end
+
+  it "self.calculate_time returns the correct time that the game took to play" do
+    start = "2017-01-19T21:34:32.748Z"
+    finish = "2017-01-19T21:35:42.278Z"
+
+    expect(Game.calculate_time(start, finish)). to eq("1 minute(s), 9.530 seconds")
+  end
 end

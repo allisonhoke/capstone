@@ -13,7 +13,7 @@ var Button = React.createClass({
   render: function() {
     return React.createElement(
       'div',
-      {className: "button col-xs-3", onClick: this.props.callbackParent},
+      {className: "button col-xs-2", onClick: this.props.callbackParent},
       this.state.display
     );
   }
