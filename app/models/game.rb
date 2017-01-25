@@ -15,8 +15,6 @@ class Game
 
     if collection.insert_one(timestart: self.timestart, timefinish: self.timefinish, level: self.level, board: self.board, target: self.target, user: self.user)
       return true
-    else
-      return false
     end
   end
 
@@ -25,6 +23,10 @@ class Game
     end_time = DateTime.iso8601(finish)
 
     total_time = end_time.to_time - start_time.to_time
+    return total_time #time in days
+  end
+
+  def self.pretty_time(total_time)
     num_of_mins = total_time.to_s[0..-3].to_i / 60
     mins_in_secs = num_of_mins * 60
 
@@ -65,9 +67,9 @@ class Game
     return user_games
   end
 
-  def find_user_top_games(id)
-    all_games = Game.find_games_by_user(id)
-
-
-  end
+  # def find_user_top_games(id)
+  #   all_games = Game.find_games_by_user(id)
+  #
+  #
+  # end
 end
