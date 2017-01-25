@@ -1,4 +1,5 @@
 include MongoHelper
+require 'time'
 
 class Game
   include Mongoid::Document
@@ -19,11 +20,11 @@ class Game
   end
 
   def self.calculate_time(start, finish)
-    start_time = DateTime.iso8601(start)
-    end_time = DateTime.iso8601(finish)
+    start_time = Time.parse(start.to_s)
+    end_time = Time.parse(finish.to_s)
 
     total_time = end_time.to_time - start_time.to_time
-    return total_time #time in days
+    return total_time #time in seconds
   end
 
   def self.pretty_time(total_time)
@@ -31,7 +32,7 @@ class Game
     mins_in_secs = num_of_mins * 60
 
     if total_time > 60
-      return num_of_mins.to_s + " minute(s), " + (total_time - mins_in_secs).to_s[0..4] + " seconds"
+      return num_of_mins.to_s + " minute(s), " + sprintf('%.2f', (total_time - mins_in_secs)) + " seconds"
     else
       return total_time.to_s + " seconds"
     end
@@ -67,9 +68,29 @@ class Game
     return user_games
   end
 
-  # def find_user_top_games(id)
-  #   all_games = Game.find_games_by_user(id)
-  #
-  #
-  # end
+  def self.find_user_top_games(id)
+    all_games = Game.find_games_by_user(id)
+
+    by_time = []
+    all_games.each do |game|
+      time_of_game = Game.calculate_time(game["timestart"], game["timefinish"])
+      by_time << {game_time: time_of_game, game: game}
+    end
+
+    sorted = by_time.sort_by {|game| game[:game_time]}
+    return sorted[0..4]
+  end
+
+  def self.pretty_board(board, target)
+    pretty_board = ""
+
+    board.each do |card|
+      pretty_board << card["value"]
+    end
+
+    pretty_board << "="
+    pretty_board << target
+
+    return pretty_board
+  end
 end

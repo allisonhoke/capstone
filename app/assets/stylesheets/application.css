@@ -25,10 +25,6 @@ body {
    position: relative;
  }
 
-.games {
-  border: solid black 2px;
-}
-
 section {
   border: solid black 2px;
   background-color: violet;
@@ -127,4 +123,19 @@ li.placeholder {background: rgb(255,240,120);}
 li.placeholder:before {
   content: "d";
   color: rgb(225,240,120);
+}
+
+.top-games {
+  float: right;
+  background-color: white;
+  border: solid black 2px;
+  border-radius: 5px;
+  padding-top: 10px;
+}
+
+.games {
+  background-color: white;
+  border: solid black 2px;
+  border-radius: 5px;
+  padding-top: 10px;
 }

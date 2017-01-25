@@ -7,24 +7,26 @@
   </div>
 </header>
 
-<div class="row">
-  <p class="col-xs-6">Number of puzzles solved: <%= @number_of_games%></p>
-
-</div>
-
-
 <div class="user-stats container">
-  <article class="games row">
-    <section class="col-xs-6">
-      <% @all_games.each do |game| %>
-      <p class="game-info"><%= game["timestart"] %>, <%= game["timefinish"] %></p>
-      <% end %>
+  <article class="row">
+    <section class="games col-xs-5">
+      <p class="col-xs-6">Number of puzzles solved: <%= @number_of_games%></p>
     </section>
 
-    <section class="col-xs-6">
-      <% @all_games.each do |game| %>
-      <p class="game-info"><%= game["timestart"] %>, <%= game["timefinish"] %></p>
-      <% end %>
+    <section class="top-games col-xs-5">
+      <table class="table-bordered">
+        <tr>
+          <th>Time:</th>
+          <th>Board:</th>
+        </tr>
+        <% @top_games.each do |game| %>
+        <tr>
+          <td><%= Game.pretty_time(game[:game_time]) %></td>
+          <td><%= Game.pretty_board(game[:game][:board], game[:game][:target])  %></td>
+
+        </tr>
+        <% end %>
+      </table>
     </section>
   </article>
 </div>
