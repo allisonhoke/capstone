@@ -1,7 +1,7 @@
 <header class="header container">
   <div class="user-info row">
     <% if session[:user_id] %>
-    <p class="col-xs-6">Hi, <%= @user["name"]%>!</p>
+    <p class="col-xs-6"><%= @user["name"]%></p>
     <link rel="stylesheet" href="/css/master.css">
     <%= link_to 'Log Out', logout_path, method: :delete, class: "user-nav col-xs-2" %>
     <%= link_to 'User Dashboard', user_path(@user[:_id]), class: "user-nav col-xs-2" %>

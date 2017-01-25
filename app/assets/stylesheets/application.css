@@ -16,9 +16,12 @@
  *= require_self
  */
 
+body {
+  background-color: #006F71;
+ }
+
 .notification {
-   border: solid black 2px;
-   background-color: lavender;
+   background-color: #006F71;
    position: relative;
  }
 
@@ -39,26 +42,28 @@ li {
   text-align: center;
   border-radius: 5px;
   height: 3em;
+  color: #44A984;
 }
 
 .number-card {
-  background-color: tomato;
+  background-color: #472255;
 }
 
 .hand {
-  background-color: salmon;
+  background-color: #185567;
   border: solid black 2px;
+  margin: 2px;
+  height: 10em;
 }
 
 .user-info {
-  border: solid black 2px;
   margin: auto;
   position: relative;
 }
 
 header>div>p {
-  color: red;
-  text-align: center;
+  color: #44A984;
+  /*text-align: center;*/
   margin-top: 2em;
   position: absolute;
   bottom: 0;
@@ -66,37 +71,35 @@ header>div>p {
 }
 
 .playing-board {
-  background-color: #59a693;
+  background-color: #185567;
   border: solid black 2px;
   height: 20em;
   margin: auto;
+  border-radius: 2px;
+  /*margin: 2px;*/
 }
 
 .user-nav {
   border: solid black 2px;
-  background-color: orange;
+  background-color: #472255;
   text-align: center;
   margin: 1em;
   padding: .5em;
   float: right;
   margin-top: 4em;
+  border-radius: 5px;
+  color: #44A984;
 }
 
 .log-in {
   border: solid black 2px;
-  background-color: orange;
+  background-color: #472255;
   margin: 1em;
   padding: 1em;
   margin-top: 4em;
-}
-
-.hand {
-  margin: 0px;
-  height: 10em;
-}
-
-.container {
-  width: 90%;
+  border-radius: 5px;
+  color: #44A984;
+  text-align: center;
 }
 
 .button {
@@ -104,23 +107,19 @@ header>div>p {
   display: block;
   margin-bottom: 0px;
   float: right;
-  background-color: magenta;
+  background-color: #472255;
+  border-radius: 5px;
+  margin: 2px;
+  color: #44A984;
 }
 
 .message {
-  border: solid black 2px;
   background-color: lightyellow;
-  /*height: 2em;*/
   position: absolute;
   bottom: 0;
-  /*padding-top: 1em;*/
   font-size: 1.9em;
-}
-
-.equal {
-  height: 10em;
-  border: solid black 2px;
-  background-color: lightpink;
+  margin: 2px;
+  color: #44A984;
 }
 
 li.placeholder {background: rgb(255,240,120);}

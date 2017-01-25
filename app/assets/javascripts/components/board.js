@@ -12,7 +12,7 @@ var Board = React.createClass({
   },
   getDefaultProps: function() {
     return {
-      message: "WELCOME!",
+      message: "To play: Make an equation from the cards below",
       startTime: new Date()
     };
   },
