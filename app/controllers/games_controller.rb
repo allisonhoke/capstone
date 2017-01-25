@@ -1,12 +1,13 @@
 class GamesController < ApplicationController
   def index
-    @dbset = Cardset.all.sample[:set]
+    dbset = Cardset.all.sample[:set]
+    operator_hand_info = ["+", "-", "*", "/", "(", ")"]
 
-    # @hand_info = {cardSet: @dbset}
-    @operator_hand_info = {cardSet: ["+", "-", "*", "/", "(", ")"]}
-    # TODO: add () to operator hand
+    operator_hand_info.each do |card|
+      dbset << card
+    end
 
-    @playing_board = {cardSet: @dbset}
+    @playing_board = {cardSet: dbset}
 
     if session[:user_id]
       @user = User.find_user(session[:user_id])

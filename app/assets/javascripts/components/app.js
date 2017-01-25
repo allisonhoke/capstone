@@ -1,30 +1,8 @@
-var Card = React.createClass({
+var App = React.createClass({
   getInitialState: function() {
     return {value: this.props.value};
   },
-  propTypes: {
-    value: React.PropTypes.string,
-    // connectDragSource: PropTypes.func.isRequired,
-    // isDragging: PropTypes.bool.isRequired
-  },
-  // getDefaultProps: function() {
-  //   return {
-  //     name: 'Mary'
-  //   };
-  // },
-  dragStart: function(e) {
-    // console.log("STARTING DRAG");
-    this.props.callDragStart(e);
-  },
-  // dragEnd: function(e) {
-  //   // console.log("ENDING DRAG");
-  //   this.props.callDragEnd(e);
-  // },
-  setCurrentCardForParent: function() {
-    // console.log("Setting current card for parent");
-    // console.log(JSON.stringify(this.state));
-    this.props.callbackParent(this.state);
-  },
+  
   render: function() {
     // var connectDragSource = this.props.connectDragSource;
     // var isDragging = this.props.isDragging;

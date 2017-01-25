@@ -77,38 +77,41 @@ var Board = React.createClass({
   render: function() {
       return React.createElement(
         'article',
-        null,
+        {className: "container"},
         // create a new game button
         React.createElement(
-          Button,
-          {display: "New Game", callbackParent: this.newGame}
-        ),
-        //create a message element to display win or lose
-        React.createElement(
-          Message,
-          {key: this.state.message, display: this.state.message}
+          'div',
+          {className: "notification row"},
+          React.createElement(
+            Button,
+            {display: "New Game", callbackParent: this.newGame}
+          ),
+          //create a message element to display win or lose
+          React.createElement(
+            Message,
+            {key: this.state.message, display: this.state.message}
+          )
         ),
         React.createElement(
           'div',
-          {className: "playing-area"},
+          {className: "playing-area row"},
         //create a ul to hold the cards
           React.createElement(
             Field,
             {ref: "field", toDisplay: "Place cards here", item_array: this.state.items}
           ),
-          // React.createElement(
-          //   Equal,
-          //   null
-          // ),
           React.createElement(
             Target,
             {ref: "target", toDisplay: "Place the target here", moving: this.state.moving}
+          ),
+          React.createElement(
+            Hand,
+            null
+          ),
+          React.createElement(
+            Button,
+            {display: "Submit",callbackParent: this.buttonClicked}
           )
-        ),
-        //render a submit button if there is at least one element on the board
-        React.createElement(
-          Button,
-          {display: "Submit", callbackParent: this.buttonClicked}
         )
       );
   }

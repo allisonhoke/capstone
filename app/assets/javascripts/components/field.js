@@ -5,7 +5,7 @@
 // );
 
 var placeholder = document.createElement("li");
-placeholder.className = "placeholder column";
+placeholder.className = "placeholder col-xs-1";
 
 var Field = React.createClass({
   getInitialState: function() {
@@ -67,6 +67,7 @@ var Field = React.createClass({
     }
     this.state.from = indexDragging;
     this.setState(this.state);
+    console.log(this.alreadyOnField(this.dragged.innerHTML));
   },
   alreadyOnField: function(value) {
     for (var i = 0; i < this.state.item_array.length; i++) {
@@ -78,7 +79,7 @@ var Field = React.createClass({
   },
   endDrag: function(e) {
     console.log("ENDING DRAG");
-    // if (e.target.parentNode.lastChild.className == "placeholder column") {
+    // if (e.target.parentNode.lastChild.className == "placeholder col-xs-1") {
     //   this.state.nodePlacement = "after";
     // }
     //
@@ -103,14 +104,14 @@ var Field = React.createClass({
     drop: function(e) {
       e.preventDefault();
       // console.log("DROPPING");
-      if (e.target.parentNode.lastChild.className == "placeholder column") {
+      if (e.target.parentNode.lastChild.className == "placeholder col-xs-1") {
         this.state.nodePlacement = "after";
       }
       // console.log(e.target.parentNode.className);
       if (this.dragged) {
         this.dragged.style.display = "block";
       }
-      if (e.target.parentNode.className == "playing-board row small-up-8 column") {
+      if (e.target.parentNode.className == "playing-board col-xs-10") {
         e.target.parentNode.removeChild(placeholder);
       } else if (e.target.parentNode.className == "playing-area"){
         e.target.removeChild(placeholder);
@@ -125,8 +126,10 @@ var Field = React.createClass({
       if(from < to) to--;
       if(this.state.nodePlacement == "after") to++;
 
-// console.log(this.alreadyOnField(this.dragged.innerHTML));
-      if (this.dragged && this.alreadyOnField(this.dragged.innerHTML)) {
+      var onField = this.alreadyOnField(this.dragged.innerHTML);
+
+      if (this.dragged && onField) {
+        console.log("in field: " + this.alreadyOnField(this.dragged.innerHTML));
           data.splice(to, 0, data.splice(from, 1)[0]);
           this.setState({item_array: data});
       } else {
@@ -134,7 +137,7 @@ var Field = React.createClass({
           data.splice((to + 1), 0, JSON.parse(e.dataTransfer.getData('card')));
           this.setState({item_array: data});
         } else {
-          data.splice(to , 0, JSON.parse(e.dataTransfer.getData('card')));
+          data.splice(to , 0, {value: "abc"}); //JSON.parse(e.dataTransfer.getData('card'))
           this.setState({item_array: data});
         }
       }
@@ -167,7 +170,7 @@ console.log(JSON.stringify(this.state.item_array));
     }
     if(e.target.className == "placeholder") return;
 
-    if(e.target.className != "placeholder column" && e.target.className != "playing-board row small-up-8 column") {
+    if(e.target.className != "placeholder col-xs-1" && e.target.className != "playing-board col-xs-10") {
       for (var i = 0; i < this.state.item_array.length; i++) {
         if (this.state.item_array[i].value == e.target.innerHTML) {
           this.state.over = i;
@@ -176,11 +179,11 @@ console.log(JSON.stringify(this.state.item_array));
       }
     }
     // console.log("OVER: " + this.state.over);
-    if (e.target.parentNode.className == "playing-board row small-up-8 column") {
+    if (e.target.parentNode.className == "playing-board col-xs-10") {
       e.target.parentNode.insertBefore(placeholder, e.target);
     }
 
-    if (e.target.className == "playing-board row small-up-8 column") {
+    if (e.target.className == "playing-board col-xs-10") {
       e.target.appendChild(placeholder);
     }
   },
@@ -194,7 +197,7 @@ console.log(JSON.stringify(this.state.item_array));
         //create a ul to hold the cards
         return React.createElement(
           'ul',
-          {className: "playing-board row small-up-8 column", onDragOver: this.dragOver, onDragLeave: this.onDragLeaveContainer, onDrop: this.drop},
+          {className: "playing-board col-xs-10", onDragOver: this.dragOver, onDragLeave: this.onDragLeaveContainer, onDrop: this.drop},
           this.state.item_array.map(function(card, index) {
             //create a card for each item in the item_array
             return React.createElement(
@@ -208,7 +211,7 @@ console.log(JSON.stringify(this.state.item_array));
     //if there is nothing on the board, render the display attribute
     return React.createElement(
         'ul',
-        {className: "playing-board column"},
+        {className: "playing-board col-xs-10"},
         this.state.display
     );
   }

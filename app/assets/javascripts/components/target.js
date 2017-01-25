@@ -62,7 +62,7 @@ var Target = React.createClass({
       // console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
     }
   },
-  
+
   render: function() {
     // console.log(this.state);
     //if there is anything on the board, render it
@@ -70,7 +70,7 @@ var Target = React.createClass({
         //create a ul to hold the cards
         return React.createElement(
           'ul',
-          {className: "playing-board", onDragOver: this.allowDrop, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
+          {className: "playing-board col-xs-2", onDragOver: this.allowDrop, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
             //create a card for each item in the item_array
             React.createElement(
               Card,
@@ -81,7 +81,7 @@ var Target = React.createClass({
     //if there is nothing on the board, render the display attribute
     return React.createElement(
         'ul',
-        {className: "playing-board", onDragOver: this.allowDrop, onDrop: this.drop},
+        {className: "playing-board col-xs-2", onDragOver: this.allowDrop, onDrop: this.drop},
         this.state.display
     );
   }

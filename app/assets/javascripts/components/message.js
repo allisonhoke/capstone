@@ -15,7 +15,7 @@ var Message = React.createClass({
     // conditional to render different css styles based on the display
     return React.createElement(
       'section',
-      {className: "message-box"},
+      {className: "message col-xs-9"},
       this.state.display
     );
   }

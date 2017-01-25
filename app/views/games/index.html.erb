@@ -1,14 +1,14 @@
-<% if session[:user_id] %>
-Current user is: <%= @user["name"]%>
-<%= link_to 'Log Out', logout_path, method: :delete %>
-<%= link_to 'User Dashboard', user_path(@user[:_id]) %>
-<% else %>
-<%= link_to 'Log in with Facebook', '/auth/facebook' %>
-<% end %>
-
+<header class="header container">
+  <div class="user-info row">
+    <% if session[:user_id] %>
+    <p class="col-xs-6">Hi, <%= @user["name"]%>!</p>
+    <link rel="stylesheet" href="/css/master.css">
+    <%= link_to 'Log Out', logout_path, method: :delete, class: "user-nav col-xs-2" %>
+    <%= link_to 'User Dashboard', user_path(@user[:_id]), class: "user-nav col-xs-2" %>
+    <% else %>
+    <%= link_to 'Log in with Facebook', '/auth/facebook', class: "log-in col-xs-2" %>
+    <% end %>
+  </div>
+</header>
 
 <%= react_component 'Board', { data: @playing_board } %>
-
-<%= react_component 'Hand', { data: @operator_hand_info } %>
-
-<%#= react_component 'Hand', { data: @hand_info } %>
