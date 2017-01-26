@@ -73,7 +73,7 @@ var Target = React.createClass({
           {className: "playing-board col-xs-2", onDragOver: this.allowDrop, onDrop: this.drop, onDragLeave: this.onDragLeaveContainer},
             //create a card for each item in the item_array
             React.createElement(
-              Card,
+              TargetCard,
               {key: this.state.item.value.toString(), value: this.state.item.value, callDragStart: this.startDrag, callbackParent: this.setCurrentCard}
             )
       );
