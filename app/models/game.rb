@@ -93,4 +93,27 @@ class Game
 
     return pretty_board
   end
+
+  def self.number_of_cards_used(board)
+    total = 1
+    board.each do |card|
+      total += 1
+    end
+    return total
+  end
+
+  def self.most_cards_used(id)
+    all_games = Game.find_games_by_user(id)
+
+    max = 0
+
+    all_games.each do |game|
+      num_cards = Game.number_of_cards_used(game["board"])
+      if num_cards > max
+        max = num_cards
+      end
+    end
+
+    return max
+  end
 end

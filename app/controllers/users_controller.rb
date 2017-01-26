@@ -7,5 +7,7 @@ class UsersController < ApplicationController
     @number_of_games = @all_games.count()
 
     @top_games = Game.find_user_top_games(session[:user_id])
+
+    @highest_num_cards_used = Game.most_cards_used(session[:user_id])
   end
 end
