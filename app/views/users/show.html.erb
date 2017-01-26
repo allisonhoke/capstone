@@ -1,5 +1,5 @@
 <header class="header container">
-  <div class="user-info row">
+  <div class="-dashboard-user row">
     <p class="col-xs-6">Hi, <%= @user["name"]%>!</p>
     <link rel="stylesheet" href="/css/master.css">
     <%= link_to 'Play', user_games_path(@user[:_id]), class: "user-nav col-xs-2" %>
@@ -9,12 +9,9 @@
 
 <div class="user-stats container">
   <article class="row">
-    <section class="games col-xs-5">
-      <p class="col-xs-6">Number of puzzles solved: <%= @number_of_games%></p>
-    </section>
-
     <section class="top-games col-xs-5">
       <table class="table-bordered">
+        <h3 class="top-five">Top 5 Games</h3>
         <tr>
           <th>Time:</th>
           <th>Board:</th>
@@ -27,6 +24,11 @@
         </tr>
         <% end %>
       </table>
+    </section>
+
+    <section class="games col-xs-5">
+      <h3 class="top-five">User Stats</h3>
+      <p class="col-xs-6">Number of puzzles solved: <%= @number_of_games%></p>
     </section>
   </article>
 </div>

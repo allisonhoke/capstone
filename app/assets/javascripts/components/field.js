@@ -137,7 +137,7 @@ var Field = React.createClass({
           data.splice((to + 1), 0, JSON.parse(e.dataTransfer.getData('card')));
           this.setState({item_array: data});
         } else {
-          data.splice(to , 0, JSON.parse(e.dataTransfer.getData('card'))); 
+          data.splice(to , 0, JSON.parse(e.dataTransfer.getData('card')));
           this.setState({item_array: data});
         }
       }

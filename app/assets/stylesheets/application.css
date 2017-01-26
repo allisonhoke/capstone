@@ -15,9 +15,12 @@
  *= require_tree .
  *= require_self
  */
+* {
+  font-family: 'Maven Pro', sans-serif;
+}
 
 body {
-  background-color: #006F71;
+  background-color: white;
  }
 
 .notification {
@@ -26,97 +29,135 @@ body {
  }
 
 section {
-  border: solid black 2px;
+  border: solid grey 1px;
   background-color: violet;
 }
 
 li {
-  border: solid black 2px;
+  border: solid grey 1px;
   font-size: 2em;
   list-style: none;
   margin: .3em;
   text-align: center;
   border-radius: 5px;
   height: 3em;
-  color: #44A984;
+  color: #027878;
 }
 
 .number-card {
-  background-color: #472255;
+  background-color: #FDB632;
   padding-top: 10px;
+}
+
+.board {
+  margin-top: 80px;
 }
 
 .hand {
   background-color: #185567;
-  border: solid black 2px;
+  border: solid grey 1px;
   margin: 2px;
   height: 10em;
+}
+
+.user {
+  float: right;
+}
+
+.name {
+/*margin-bottom: 2em;*/
+color: #027878;
+text-align: center;
+margin-top: 1em;
+font-size: 1.5em;
 }
 
 .user-info {
   margin: auto;
   position: relative;
+  /*margin-bottom: .5em;*/
+}
+
+.abacus {
+  height: 6em;
+  width: 6em;
+  float: left;
+  margin-top: 1em;
+}
+
+.dashboard-user {
+  margin: auto;
+  position: relative;
 }
 
 header>div>p {
-  color: #44A984;
+  color: black;
   /*text-align: center;*/
-  margin-top: 2em;
   position: absolute;
   bottom: 0;
-  font-size: 2em;
+  font-size: 5em;
 }
 
 .playing-board {
-  background-color: #185567;
-  border: solid black 2px;
+  background-color: #027878;
+  border: solid grey 1px;
   height: 20em;
   margin: auto;
-  border-radius: 2px;
-  /*margin: 2px;*/
+  border-radius: 5px;
+  color: white;
+  font-size: 1.1em;
 }
 
 .user-nav {
-  border: solid black 2px;
-  background-color: #472255;
+  border: solid grey 1px;
+  background-color: #FDB632;
   text-align: center;
-  margin: 1em;
+  margin-left: .3em;
   padding: .5em;
   float: right;
-  margin-top: 4em;
+  /*margin-bottom: 1em;*/
+  margin-top: 1em;
   border-radius: 5px;
-  color: #44A984;
+  color: #006F71;
+  font-size: 1em;
+}
+
+h3 {
+  text-align: center;
 }
 
 .log-in {
-  border: solid black 2px;
-  background-color: #472255;
-  margin: 1em;
+  border: solid grey 1px;
+  background-color: #FDB632;
   padding: 1em;
   margin-top: 4em;
   border-radius: 5px;
-  color: #44A984;
+  color: #006F71;
   text-align: center;
+  font-size: 1em;
 }
 
 .button {
-  border: solid black 2px;
+  border: solid grey 1px;
   display: block;
-  margin-bottom: 0px;
   float: right;
-  background-color: #472255;
+  background-color: #FDB632;
   border-radius: 5px;
   margin: 2px;
-  color: #44A984;
+  color: #006F71;
+  font-size: 1em;
 }
 
 .message {
-  background-color: lightyellow;
+  background-color: #027878;
   position: absolute;
   bottom: 0;
   font-size: 1.9em;
-  margin: 2px;
-  color: #44A984;
+  margin-bottom: 2px;
+  color: white;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
 }
 
 li.placeholder {background: rgb(255,240,120);}
@@ -126,16 +167,16 @@ li.placeholder:before {
 }
 
 .top-games {
-  float: right;
   background-color: white;
-  border: solid black 2px;
+  border: solid grey 1px;
   border-radius: 5px;
   padding-top: 10px;
 }
 
 .games {
+  float: right;
   background-color: white;
-  border: solid black 2px;
+  border: solid grey 1px;
   border-radius: 5px;
   padding-top: 10px;
 }

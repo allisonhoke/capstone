@@ -12,7 +12,7 @@ var Board = React.createClass({
   },
   getDefaultProps: function() {
     return {
-      message: "To play: Make an equation from the cards below",
+      message: "Pick a target card. Then arrange the other cards into a statement to equal target.",
       startTime: new Date()
     };
   },
@@ -77,15 +77,11 @@ var Board = React.createClass({
   render: function() {
       return React.createElement(
         'article',
-        {className: "container"},
+        {className: "board container"},
         // create a new game button
         React.createElement(
           'div',
           {className: "notification row"},
-          React.createElement(
-            Button,
-            {display: "New Game", callbackParent: this.newGame}
-          ),
           //create a message element to display win or lose
           React.createElement(
             Message,
@@ -97,20 +93,24 @@ var Board = React.createClass({
           {className: "playing-area row"},
         //create a ul to hold the cards
           React.createElement(
-            Field,
-            {ref: "field", toDisplay: "Place cards here", item_array: this.state.items}
-          ),
-          React.createElement(
             Target,
             {ref: "target", toDisplay: "Place the target here", moving: this.state.moving}
           ),
           React.createElement(
-            Hand,
-            null
+            Field,
+            {ref: "field", toDisplay: "Place cards here", item_array: this.state.items}
           ),
+          // React.createElement(
+          //   Hand,
+          //   null
+          // ),
           React.createElement(
             Button,
             {display: "Submit",callbackParent: this.buttonClicked}
+          ),
+          React.createElement(
+            Button,
+            {display: "New Game", callbackParent: this.newGame}
           )
         )
       );
