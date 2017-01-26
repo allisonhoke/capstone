@@ -19,8 +19,25 @@
   font-family: 'Maven Pro', sans-serif;
 }
 
-body {
+/*body {
   background-color: white;
+ }*/
+ body {
+   display: block;
+   position: relative;
+
+ }
+
+ body::after {
+   content: "";
+   background-image: url("math.jpg");
+   opacity: 0.1;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   position: absolute;
+   z-index: -1;
  }
 
 .notification {
