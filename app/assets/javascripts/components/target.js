@@ -12,7 +12,6 @@ var Target = React.createClass({
     };
   },
   setCurrentCard: function(card) {
-   // console.log("BOARDcard passed to parent is: " + JSON.stringify(card));
    this.state.current_card = card;
    this.setState(this.state);
  },
@@ -21,26 +20,20 @@ var Target = React.createClass({
   },
   drop: function(e) {
     e.preventDefault();
-    // console.log("TRANSFERRING:" + JSON.parse(e.dataTransfer.getData('card')));
     if (this.state.item === null) {
       var data = JSON.parse(e.dataTransfer.getData('card'));
-      // var data = JSON.parse(e.dataTransfer.getData('card'));
-      // console.log("TARGET before state: " + JSON.stringify(this.state));
       // add the card to the item array
       this.state.item = (data);
       //set the state, which re-renders the board component with the correct cards
       this.setState(this.state);
-      // console.log("TARGET after state: " + JSON.stringify(this.state));
     }
   },
   startDrag: function(e) {
-    // console.log("STARTING DRAG ");
     this.dragged = e.currentTarget;
     e.dataTransfer.effectAllowed = 'move';
 
     e.dataTransfer.setData("text/html", e.currentTarget);
     e.dataTransfer.setData('card', JSON.stringify({value: e.currentTarget.innerHTML}));
-    // console.log(e.dataTransfer.getData('card'));
   },
   onDragLeaveContainer: function(e) {
     var x = e.clientX;
@@ -59,12 +52,10 @@ var Target = React.createClass({
         this.state.current_card = null;
       //set the state, which re-renders the hand with the correct cards in it
       this.setState(this.state);
-      // console.log("FINAL HAND: " + JSON.stringify(this.state.item_array));
     }
   },
 
   render: function() {
-    // console.log(this.state);
     //if there is anything on the board, render it
     if (this.state.item !== null) {
         //create a ul to hold the cards

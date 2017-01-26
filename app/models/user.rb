@@ -5,9 +5,6 @@ class User
   field :provider, type: String
   field :uid, type: String
   field :name, type: String
-  # field :location, type: String
-  # field :image_url, type: String
-  # field :url, type: String
   field :oauth_token, type: String
   field :oauth_expires_at, type: DateTime
   field :num_puzzles, type: Integer
@@ -47,7 +44,6 @@ class User
     else
       user.name  = auth_hash['info']['nickname']
     end
-    # user.email = auth_hash['info']['email']
 
     if collection.insert_one(provider: user.provider, uid: user.uid, name: user.name, oauth_token: user.oauth_token, oauth_expires_at: user.oauth_expires_at, num_puzzles: user.num_puzzles)
       return user

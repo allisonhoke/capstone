@@ -1,8 +1,6 @@
 class SessionsController < ApplicationController
   def create
-    # render text: request.env['omniauth.auth'].to_yaml
     auth_hash = request.env['omniauth.auth']
-    # redirect to login_failure unless auth_hash['uid']
 
     @user = User.find_by(uid: auth_hash[:uid])
     if @user == false

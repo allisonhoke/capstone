@@ -17,7 +17,6 @@ var Board = React.createClass({
     };
   },
   handleData: function(data) {
-    // console.log("DATA is: " + JSON.stringify(data));
     if (data.board) {
       this.state.message = "CORRECT!";
       this.setState(this.state);
@@ -25,7 +24,6 @@ var Board = React.createClass({
       this.state.message = data.message;
       this.setState(this.state);
     }
-    // console.log(this.state.message);
   },
   loggedInOrNot: function() {
     if (window.location.href == "http://myadacus.com/" || window.location.href == "http://localhost:3000/") {
@@ -100,10 +98,6 @@ var Board = React.createClass({
             Field,
             {ref: "field", toDisplay: "Place cards here", item_array: this.state.items}
           ),
-          // React.createElement(
-          //   Hand,
-          //   null
-          // ),
           React.createElement(
             Button,
             {display: "Submit",callbackParent: this.buttonClicked}

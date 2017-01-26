@@ -18,7 +18,6 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(board: params[:final_board], target: params[:target], user: params[:user_id], level: "level", timestart: params[:startTime], timefinish: params[:endTime]) #item_array
-    # @cardset = Cardset.new(set: Cardset.get_nums_only(params[:final_board])) # returns array of strings of numbers
 
     @message = {message: "That is incorrect. Please try again."}
 
@@ -26,17 +25,11 @@ class GamesController < ApplicationController
       if @game.insert_document
         render json: @game
       else
-        head 500 # OR OTHER ERROR CODE
+        head 500
       end
     else
       # head 400
       render json: @message
     end
   end
-
-  # private
-  #
-  # def game_params
-  #   params.require(:game).permit(:timestart, :timefinish, :level, :user, :cardset)
-  # end
 end
