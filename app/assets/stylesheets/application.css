@@ -30,7 +30,7 @@
 
  body::after {
    content: "";
-   background-image: url("math.jpg");
+   background-image: url("http://www.vector-eps.com/wp-content/gallery/math-formula-vectors/mechanics-formula-vectors.jpg");
    opacity: 0.1;
    top: 0;
    left: 0;
